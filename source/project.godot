@@ -1,0 +1,64 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="CrawBattle"
+run/main_scene="uid://umsdcblhhwsj"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1366
+window/size/viewport_height=768
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/VoxelSurport/plugin.cfg", "res://addons/copilot-advanced/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://scenes/": "purple",
+"res://scripts/": "red",
+"res://voxels/": "orange"
+}
+
+[importer_defaults]
+
+voxel_mesh_library={
+"material/import_materials_textures": false,
+"material/material_path": "",
+"material/material_trans_path": "",
+"mesh/frame_index": 0,
+&"mesh/import_meshes": false,
+"mesh/mode": 0,
+"mesh/scale": 0.1,
+&"mesh/unwrap_lightmap_uv2": false,
+"mesh/uv2_texel_size": 0.2
+}
+voxel_mesh={
+"material/import_materials_textures": false,
+"material/material_path": "",
+"material/material_trans_path": "",
+"mesh/frame_index": 0,
+"mesh/scale": 0.1,
+&"mesh/unwrap_lightmap_uv2": false,
+"mesh/uv2_texel_size": 0.2
+}
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
