@@ -16,8 +16,9 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				start_drag()
-				print("sobe")
+				if is_mouse_over():
+					start_drag()
+					print("sobe")
 			else:
 				stop_drag()
 				print("desce")
@@ -109,6 +110,25 @@ func atualizar_snap():
 
 func voltar_para_ultima_posicao():
 	global_position = ultima_posicao_valida
+
+func is_mouse_over() -> bool:
+	var mouse_pos = get_viewport().get_mouse_position()
+	
+	var ray_origin = camera.project_ray_origin(mouse_pos)
+	var ray_dir = camera.project_ray_normal(mouse_pos)
+	
+	var space_state = get_world_3d().direct_space_state
+	
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_origin + ray_dir * 1000)
+	query.collide_with_areas = false
+	query.collide_with_bodies = true
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result and result.collider == self:
+		return true
+	
+	return false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
