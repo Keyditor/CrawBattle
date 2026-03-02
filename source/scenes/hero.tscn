@@ -4,6 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bjo4j6v106ejs" path="res://voxels/battleground_base.vox" id="2_mv13s"]
 [ext_resource type="ArrayMesh" uid="uid://o01ay0ekg2k2" path="res://voxels/battleground_hp1.vox" id="3_w7pyx"]
 [ext_resource type="ArrayMesh" uid="uid://c4wfavfhhheca" path="res://voxels/battleground_hp2.vox" id="4_y2sko"]
+[ext_resource type="Script" uid="uid://wv8hp3dd8tgy" path="res://scripts/slot.gd" id="5_n40cg"]
 [ext_resource type="ArrayMesh" uid="uid://c32w4pf12tx0m" path="res://voxels/bronze_small_item.vox" id="5_y2sko"]
 [ext_resource type="Texture2D" uid="uid://c5ii8veg0bvn" path="res://voxels/Remake_image_in_916_1c0eeb3bc4.jpeg" id="6_mo806"]
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="6_y2sko"]
@@ -48,8 +49,8 @@ _data = {
 &"to_stash": SubResource("Animation_y2sko")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mv13s"]
-size = Vector3(1.5837402, 1.7973633, 4.4991455)
+[sub_resource type="BoxShape3D" id="BoxShape3D_mo806"]
+size = Vector3(1.4292603, 1.2254028, 4.1168213)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
 points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
@@ -78,113 +79,203 @@ environment = SubResource("Environment_mv13s")
 libraries/ = SubResource("AnimationLibrary_mo806")
 
 [node name="onGorund" type="Node3D" parent="." unique_id=1331164376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 0)
 
-[node name="onGround" type="Area3D" parent="." unique_id=1205826959]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7516537, 1.0395705, 2.6382723)
+[node name="slot1" type="Area3D" parent="onGorund" unique_id=838990134 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8413177, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 1
+inventory = NodePath("..")
 
-[node name="Slot1" type="CollisionShape3D" parent="onGround" unique_id=489753997]
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot1" unique_id=1707359144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot2" type="CollisionShape3D" parent="onGround" unique_id=344354529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6467896, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot2" type="Area3D" parent="onGorund" unique_id=408203188 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.142475, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 2
+inventory = NodePath("..")
 
-[node name="Slot3" type="CollisionShape3D" parent="onGround" unique_id=305620463]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36803, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot2" unique_id=1510365625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot4" type="CollisionShape3D" parent="onGround" unique_id=2112371815]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.049574, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot3" type="Area3D" parent="onGorund" unique_id=1931949465 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4012785, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 3
+inventory = NodePath("..")
 
-[node name="Slot5" type="CollisionShape3D" parent="onGround" unique_id=1123405021]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.745019, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot3" unique_id=1952904336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot6" type="CollisionShape3D" parent="onGround" unique_id=212697601]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.465263, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot4" type="Area3D" parent="onGorund" unique_id=561334397 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7224718, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 4
+inventory = NodePath("..")
 
-[node name="Slot7" type="CollisionShape3D" parent="onGround" unique_id=1653714751]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.160002, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot4" unique_id=1366990814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot8" type="CollisionShape3D" parent="onGround" unique_id=565759736]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8654175, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot5" type="Area3D" parent="onGorund" unique_id=49983954 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0072945356, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 5
+inventory = NodePath("..")
 
-[node name="Slot9" type="CollisionShape3D" parent="onGround" unique_id=387442755]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.550083, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot5" unique_id=1168795398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="onStash" type="Area3D" parent="." unique_id=51658609]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7516537, 1.0395705, 8.664197)
+[node name="slot6" type="Area3D" parent="onGorund" unique_id=1981238439 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6688808, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 6
+inventory = NodePath("..")
 
-[node name="Slot1" type="CollisionShape3D" parent="onStash" unique_id=1419075535]
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot6" unique_id=1082161544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot2" type="CollisionShape3D" parent="onStash" unique_id=304051431]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6467896, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot7" type="Area3D" parent="onGorund" unique_id=24456414 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46106, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 7
+inventory = NodePath("..")
 
-[node name="Slot3" type="CollisionShape3D" parent="onStash" unique_id=157572002]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36803, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot7" unique_id=575068365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot4" type="CollisionShape3D" parent="onStash" unique_id=524806697]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.049574, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot8" type="Area3D" parent="onGorund" unique_id=2131627726 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1153226, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 8
+inventory = NodePath("..")
 
-[node name="Slot5" type="CollisionShape3D" parent="onStash" unique_id=1785821339]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.745019, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot8" unique_id=1651163223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot6" type="CollisionShape3D" parent="onStash" unique_id=76823975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.465263, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot9" type="Area3D" parent="onGorund" unique_id=461459167 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.836703, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 9
+inventory = NodePath("..")
 
-[node name="Slot7" type="CollisionShape3D" parent="onStash" unique_id=1688467738]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.160002, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onGorund/slot9" unique_id=1866687823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
 
-[node name="Slot8" type="CollisionShape3D" parent="onStash" unique_id=122283453]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8654175, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="onStash" type="Node3D" parent="." unique_id=1650304631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 5.863124)
 
-[node name="Slot9" type="CollisionShape3D" parent="onStash" unique_id=1553615967]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.550083, 0, 0)
-shape = SubResource("BoxShape3D_mv13s")
-debug_color = Color(0, 0.6, 0.69803923, 1)
+[node name="slot1" type="Area3D" parent="onStash" unique_id=228968215 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8413177, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 1
+inventory = NodePath("..")
 
-[node name="BronzeSmallItem" type="MeshInstance3D" parent="." unique_id=340590917 node_paths=PackedStringArray("camera")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot1" unique_id=694284955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot2" type="Area3D" parent="onStash" unique_id=663688976 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.142475, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 2
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot2" unique_id=485992654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot3" type="Area3D" parent="onStash" unique_id=1149372589 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4012785, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 3
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot3" unique_id=1263486137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot4" type="Area3D" parent="onStash" unique_id=1577726598 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7224718, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 4
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot4" unique_id=29803067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot5" type="Area3D" parent="onStash" unique_id=2122302613 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0072945356, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 5
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot5" unique_id=1265767298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot6" type="Area3D" parent="onStash" unique_id=1123410162 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6688808, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 6
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot6" unique_id=46563188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot7" type="Area3D" parent="onStash" unique_id=1851082417 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46106, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 7
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot7" unique_id=300980227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot8" type="Area3D" parent="onStash" unique_id=784039826 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1153226, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 8
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot8" unique_id=1061553308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot9" type="Area3D" parent="onStash" unique_id=1881790255 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.836703, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 9
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onStash/slot9" unique_id=1140849729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="BronzeSmallItemteste" type="StaticBody3D" parent="." unique_id=860416543 node_paths=PackedStringArray("camera")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.788, 0.5, 8.7839775)
-mesh = ExtResource("5_y2sko")
 script = ExtResource("6_y2sko")
 camera = NodePath("../Camera3D")
-return_speed = 60.0
 
-[node name="Sprite3D" type="Sprite3D" parent="BronzeSmallItem" unique_id=1981041922]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeSmallItemteste" unique_id=1869814656]
+shape = SubResource("ConvexPolygonShape3D_n40cg")
+
+[node name="BronzeSmallItem" type="MeshInstance3D" parent="BronzeSmallItemteste" unique_id=340590917]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+mesh = ExtResource("5_y2sko")
+
+[node name="Sprite3D" type="Sprite3D" parent="BronzeSmallItemteste/BronzeSmallItem" unique_id=1981041922]
 transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
 texture = ExtResource("6_mo806")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="BronzeSmallItem" unique_id=860416543]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeSmallItem/StaticBody3D" unique_id=1869814656]
-shape = SubResource("ConvexPolygonShape3D_n40cg")
