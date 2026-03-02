@@ -2,6 +2,7 @@ extends Area3D
 
 @export var ID: int
 @export var inventory: Node
+var ocupado_por = null
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -16,3 +17,12 @@ func _on_body_exited(body):
 	if body.has_method("remover_slot"):
 		body.remover_slot(self)
 		print("saiu de: ",ID)
+
+func esta_livre() -> bool:
+	return ocupado_por == null
+
+func reservar(item):
+	ocupado_por = item
+
+func liberar():
+	ocupado_por = null

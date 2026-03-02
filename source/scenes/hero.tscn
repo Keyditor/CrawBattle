@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c5ii8veg0bvn" path="res://voxels/Remake_image_in_916_1c0eeb3bc4.jpeg" id="6_mo806"]
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="6_y2sko"]
 [ext_resource type="ArrayMesh" uid="uid://bwa54rb5c105r" path="res://voxels/bronze_medium_item.vox" id="9_txblw"]
+[ext_resource type="ArrayMesh" uid="uid://dx6jc4uuscksy" path="res://voxels/bronze_large_item.vox" id="10_n5qna"]
 
 [sub_resource type="Environment" id="Environment_mv13s"]
 ambient_light_source = 2
@@ -55,6 +56,12 @@ size = Vector3(1.4292603, 1.2254028, 4.1168213)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
 points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n5qna"]
+points = PackedVector3Array(-4, 0, -3.5, -4, 0, 3.2997656, -4, 0.19998042, -3.5, 3.699295, 0, -3.5, -4, 0.19998042, 3.2997656, -3.9005482, 0, 3.4999223, -3.9005482, 0.3, -3.4006166, 3.699295, 0.19998042, -3.5, 3.899765, 0, -3.4006166, -3.9005482, 0.19998042, 3.4999223, -3.9005482, 0.3, 3.199687, -3.7000782, 0, 3.6000004, 3.5998435, 0.3, -3.4006166, 3.899765, 0.19998042, -3.4006166, 4, 0, -3.20046, -3.7000782, 0.19998042, 3.6000004, -3.6006265, 0.3, 3.4999223, -3.8003132, 0.3, 3.3998437, 4, 0, 3.6000004, 3.79953, 0.3, -3.3005383, 4, 0.19998042, -3.20046, 4, 0.19998042, 3.6000004, 3.899765, 0.3, 3.4999223, 3.899765, 0.3, -3.1003819)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d6xj2"]
+points = PackedVector3Array(-6, 0, -3.5, -6, 0, 3.2997656, -6, 0.19998042, -3.5, 5.699295, 0, -3.5, -6, 0.19998042, 3.2997656, -5.9001565, 0, 3.4999223, -5.9001565, 0.3, -3.4006166, 5.699295, 0.19998042, -3.5, 5.898982, 0, -3.4006166, -5.9001565, 0.19998042, 3.4999223, -5.9001565, 0.3, 3.199687, -5.70047, 0, 3.6000004, 5.599452, 0.3, -3.4006166, 5.898982, 0.19998042, -3.4006166, 6, 0, -3.20046, -5.70047, 0.19998042, 3.6000004, -5.800313, 0.3, 3.3998437, 6, 0, 3.6000004, 5.799139, 0.3, -3.3005383, 6, 0.19998042, -3.20046, -5.6006265, 0.3, 3.4999223, 6, 0.19998042, 3.6000004, 5.898982, 0.3, -3.1003819, 5.898982, 0.3, 3.4999223)
 
 [node name="Node3D" type="Node3D" unique_id=803403698]
 script = ExtResource("1_3uyx6")
@@ -287,9 +294,6 @@ script = ExtResource("6_y2sko")
 camera = NodePath("../Camera3D")
 slots_necessarios = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeMediumItemteste" unique_id=1481948846]
-shape = SubResource("ConvexPolygonShape3D_n40cg")
-
 [node name="BronzeSmallItem" type="MeshInstance3D" parent="BronzeMediumItemteste" unique_id=1248458526]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = ExtResource("9_txblw")
@@ -299,3 +303,27 @@ transform = Transform3D(-0.94, -1.4193606e-07, 6.204222e-15, 0, -4.1088704e-08, 
 texture = ExtResource("6_mo806")
 region_enabled = true
 region_rect = Rect2(0, 331.15, 768, 702.49)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeMediumItemteste" unique_id=1668022530]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_n5qna")
+
+[node name="BronzeLargeItemteste" type="StaticBody3D" parent="." unique_id=1164238368 node_paths=PackedStringArray("camera")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.377, 0.5, 8.784)
+script = ExtResource("6_y2sko")
+camera = NodePath("../Camera3D")
+slots_necessarios = 3
+
+[node name="BronzeSmallItem" type="MeshInstance3D" parent="BronzeLargeItemteste" unique_id=1272851677]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+mesh = ExtResource("10_n5qna")
+
+[node name="Sprite3D" type="Sprite3D" parent="BronzeLargeItemteste/BronzeSmallItem" unique_id=321388529]
+transform = Transform3D(-0.94, -1.4193606e-07, 6.204222e-15, 0, -4.1088704e-08, -0.94, 1.4193606e-07, -0.94, 4.1088704e-08, 0, 0, 0)
+texture = ExtResource("6_mo806")
+region_enabled = true
+region_rect = Rect2(0, 331.15, 768, 702.49)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeLargeItemteste" unique_id=876809128]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_d6xj2")

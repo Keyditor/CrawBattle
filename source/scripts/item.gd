@@ -4,6 +4,7 @@ extends StaticBody3D
 @export var base_y := 0.5
 @export var return_speed := 6.0
 @export var slots_necessarios: int = 1
+var slots_reservados: Array = []
 var slots_encostando: Array = []
 var slot_escolhido = null
 var ultima_posicao_valida: Vector3
@@ -63,7 +64,6 @@ func remover_slot(slot):
 	#atualizar_snap()
 
 func atualizar_snap():
-
 	if slots_encostando.size() < slots_necessarios:
 			voltar_para_ultima_posicao()	
 			return
@@ -81,7 +81,11 @@ func atualizar_snap():
 		if slot.inventory != inventario_base:
 			voltar_para_ultima_posicao()
 			return
-	
+	# Verifica se slots estão livres
+	for slot in candidatos:
+		if not slot.esta_livre() and slot.ocupado_por != self:
+			voltar_para_ultima_posicao()
+			return
 	# Verifica IDs consecutivos
 	for i in range(candidatos.size() - 1):
 		if candidatos[i+1].ID != candidatos[i].ID + 1:
@@ -106,6 +110,10 @@ func atualizar_snap():
 			var meio_slot = candidatos[1]
 			var pos = meio_slot.global_position
 			global_position = Vector3(pos.x, global_position.y, pos.z)
+	liberar_slots_anteriores()
+	for slot in candidatos:
+		slot.reservar(self)
+		slots_reservados.append(slot)
 	ultima_posicao_valida = global_position
 
 func voltar_para_ultima_posicao():
@@ -129,6 +137,12 @@ func is_mouse_over() -> bool:
 		return true
 	
 	return false
+
+func liberar_slots_anteriores():
+	for slot in slots_reservados:
+		if slot.ocupado_por == self:
+			slot.liberar()
+	slots_reservados.clear()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
