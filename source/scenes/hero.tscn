@@ -6,13 +6,6 @@
 [ext_resource type="ArrayMesh" uid="uid://c4wfavfhhheca" path="res://voxels/battleground_hp2.vox" id="4_y2sko"]
 [ext_resource type="Script" uid="uid://dx3c2xfiebw8i" path="res://scenes/inventory.gd" id="5_d6xj2"]
 [ext_resource type="Script" uid="uid://wv8hp3dd8tgy" path="res://scripts/slot.gd" id="5_n40cg"]
-[ext_resource type="ArrayMesh" uid="uid://c32w4pf12tx0m" path="res://voxels/bronze_small_item.vox" id="5_y2sko"]
-[ext_resource type="Texture2D" path="res://voxels/Remake_image_in_916_1c0eeb3bc4.jpeg" id="6_mo806"]
-[ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="6_y2sko"]
-[ext_resource type="Texture2D" uid="uid://b1nm2g31sd05c" path="res://voxels/smallPlaceholder.jpg" id="8_sryfu"]
-[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="9_6mqrs"]
-[ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="11_6mqrs"]
-[ext_resource type="Texture2D" uid="uid://c7tw0aexc3fl3" path="res://voxels/largePlaceholder.jpg" id="12_k8rms"]
 
 [sub_resource type="Environment" id="Environment_mv13s"]
 ambient_light_source = 2
@@ -56,9 +49,6 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mo806"]
 size = Vector3(1.4292603, 1.2254028, 4.1168213)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
-points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
 
 [node name="Node3D" type="Node3D" unique_id=803403698]
 script = ExtResource("1_3uyx6")
@@ -179,6 +169,7 @@ shape = SubResource("BoxShape3D_mo806")
 
 [node name="onStash" type="Node3D" parent="." unique_id=1650304631]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 6.695134)
+script = ExtResource("5_d6xj2")
 
 [node name="slot1" type="Area3D" parent="onStash" unique_id=228968215 node_paths=PackedStringArray("inventory")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8413177, 0, 2.435626)
@@ -270,67 +261,8 @@ inventory = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
 shape = SubResource("BoxShape3D_mo806")
 
-[node name="ItemTest1" type="StaticBody3D" parent="." unique_id=860416543 node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.788, 0.5, 9.354283)
-script = ExtResource("6_y2sko")
-itemName = "TESTE"
-itemImage = ExtResource("8_sryfu")
-camera = NodePath("../Camera3D")
-
-[node name="Shape" type="MeshInstance3D" parent="ItemTest1" unique_id=340590917]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
-mesh = ExtResource("9_6mqrs")
-
-[node name="Image" type="Sprite3D" parent="ItemTest1/Shape" unique_id=1981041922]
-transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
-flip_h = true
-texture = ExtResource("6_mo806")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemTest1" unique_id=1869814656]
-shape = SubResource("ConvexPolygonShape3D_n40cg")
-
-[node name="ItemTest2" type="StaticBody3D" parent="." unique_id=1566673885 node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.2427278, 0.5, 9.354283)
-script = ExtResource("6_y2sko")
-itemName = "TESTE"
-itemImage = ExtResource("11_6mqrs")
-camera = NodePath("../Camera3D")
-slots_necessarios = 2
-tier = 1
-
-[node name="Shape" type="MeshInstance3D" parent="ItemTest2" unique_id=1398296875]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
-mesh = ExtResource("5_y2sko")
-
-[node name="Image" type="Sprite3D" parent="ItemTest2/Shape" unique_id=1269165774]
-transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
-flip_h = true
-texture = ExtResource("6_mo806")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemTest2" unique_id=10688786]
-shape = SubResource("ConvexPolygonShape3D_n40cg")
-
-[node name="ItemTest3" type="StaticBody3D" parent="." unique_id=143857109 node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.107226074, 0.5, 9.354283)
-script = ExtResource("6_y2sko")
-itemName = "TESTE"
-itemImage = ExtResource("12_k8rms")
-camera = NodePath("../Camera3D")
-slots_necessarios = 3
-tier = 4
-
-[node name="Shape" type="MeshInstance3D" parent="ItemTest3" unique_id=458462163]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
-mesh = ExtResource("5_y2sko")
-
-[node name="Image" type="Sprite3D" parent="ItemTest3/Shape" unique_id=316757259]
-transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
-flip_h = true
-texture = ExtResource("6_mo806")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemTest3" unique_id=1481484327]
-shape = SubResource("ConvexPolygonShape3D_n40cg")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1830808997]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20.485764, 0)
 shadow_enabled = true
+directional_shadow_blend_splits = true
+sky_mode = 1

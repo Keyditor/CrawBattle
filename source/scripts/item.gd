@@ -12,7 +12,10 @@ extends StaticBody3D
 @onready var mesh_instance: MeshInstance3D = $Shape
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var sprite: Sprite3D = $Shape/Image
+@onready var label: Label3D = $Label3D
 
+var adding = false
+var oldItem = false
 var slots_reservados: Array = []
 var slots_encostando: Array = []
 var slot_escolhido = null
@@ -28,13 +31,25 @@ func _input(event):
 			if event.pressed:
 				if is_mouse_over():
 					start_drag()
-					print("sobe")
+					#print("sobe")
 					
 			else:
 				stop_drag()
-				print("desce")
+				#print("desce")
 
 func _process(delta):
+	if Game.checkUpgrade:
+		print("dando upgrade consecutivo")
+		var upItem = existe_item_igual()
+		if upItem:
+			print(upItem.name,"",upItem.tier)
+			upgrade(upItem)
+			Game.checkUpgrade = false
+		print("desligando upgrade")
+	if !slots_reservados and !adding:
+		label.text = "Posicione o item em um slot vazio!"
+	else:
+		label.text = ""
 	if dragging:
 		move_to_mouse()
 	# Suaviza subida e descida
@@ -44,12 +59,13 @@ func start_drag():
 	dragging = true
 	target_y = float_height
 	drag_plane = Plane(Vector3.UP, float_height)
-	print(global_position.y)
+	#print(global_position.y)
 
 func stop_drag():
+	oldItem = true
 	dragging = false
 	global_position.y = base_y
-	print(global_position.y)
+	#print(global_position.y)
 	atualizar_snap()
 
 func followto(_side): #futura função para reorganização
@@ -162,7 +178,7 @@ func liberar_slots_anteriores():
 
 func aplicar_material(mat):
 	for i in range(mesh_instance.mesh.get_surface_count()):
-		print("setting")
+		#print("setting")
 		mesh_instance.set_surface_override_material(i, mat)
 		#mesh_instance.material_override = mat
 		#mesh_instance.mesh.surface_set_material(0, mat)
@@ -176,10 +192,10 @@ func colorNshade():
 		1: mat = preload("res://shaders/silver_itens.tres")
 		2: mat = preload("res://shaders/gold_itens.tres")
 		3: mat = preload("res://shaders/platina_itens.tres")
-		4: mat = preload("res://shaders/rainbow.gdshader")
+		4: mat = preload("res://shaders/rainbow_itens.tres")
 	aplicar_material(mat)
-	print(mesh_instance)
-	print(mesh_instance.name)
+	#print(mesh_instance)
+	#print(mesh_instance.name)
 
 func resizer(_slots):
 	match _slots:
@@ -198,15 +214,56 @@ func resizer(_slots):
 			
 	colorNshade()
 
+func existe_item_igual():
+	for node in get_tree().get_nodes_in_group("items"):
+		if node != self and node.itemName == itemName and node.tier == tier:
+			print("encontrou o item")
+			print(adding)
+			return node
+	
+	return false
+
 func imager():
 	sprite.texture = itemImage
 
+func upgrade(item):
+	if item.tier !=4:
+		set_process(false)
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.set_ease(Tween.EASE_IN_OUT)
+
+		tween.tween_property(
+		self,
+		"global_position",
+		item.global_position,
+		0.3
+		)
+
+		await tween.finished
+		if is_instance_valid(item):
+			item.tier +=1
+			item.colorNshade()
+		adding = false
+		print(adding)
+		queue_free()
+		Game.queueUpgrade()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	label.text = ""
+	add_to_group("items")
 	await get_tree().process_frame
 	resizer(slots_necessarios)
 	imager()
 	ultima_posicao_valida = global_position
 	global_position.y = base_y
 	target_y = base_y
+	#if has_node("../onStash"):
+		#$"../onStash".add_item(self)
+	if has_node("../Camera3D"):
+		camera = $"../Camera3D"
+	var nItem = existe_item_igual()
+	if nItem:
+		upgrade(nItem)
 	pass # Replace with function body.

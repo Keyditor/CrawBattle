@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c73yubsow46qs"]
+
+[ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xfg7t"]
+[ext_resource type="Texture2D" uid="uid://b1nm2g31sd05c" path="res://voxels/smallPlaceholder.jpg" id="2_mabah"]
+[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="3_dxdcr"]
+[ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
+points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
+
+[node name="ItemTest1" type="StaticBody3D" unique_id=578422450]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("1_xfg7t")
+itemName = "TESTE"
+itemImage = ExtResource("2_mabah")
+
+[node name="Shape" type="MeshInstance3D" parent="." unique_id=946136437]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
+mesh = ExtResource("3_dxdcr")
+
+[node name="Image" type="Sprite3D" parent="Shape" unique_id=310197420]
+transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
+flip_h = true
+texture = ExtResource("4_ckac4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=953833221]
+shape = SubResource("ConvexPolygonShape3D_n40cg")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1323496885]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 3.333333, 0)
+billboard = 1
+text = "PLACEHOLDER"
+font_size = 142
