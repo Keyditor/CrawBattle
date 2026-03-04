@@ -4,12 +4,15 @@
 [ext_resource type="ArrayMesh" uid="uid://bjo4j6v106ejs" path="res://voxels/battleground_base.vox" id="2_mv13s"]
 [ext_resource type="ArrayMesh" uid="uid://o01ay0ekg2k2" path="res://voxels/battleground_hp1.vox" id="3_w7pyx"]
 [ext_resource type="ArrayMesh" uid="uid://c4wfavfhhheca" path="res://voxels/battleground_hp2.vox" id="4_y2sko"]
+[ext_resource type="Script" uid="uid://dx3c2xfiebw8i" path="res://scenes/inventory.gd" id="5_d6xj2"]
 [ext_resource type="Script" uid="uid://wv8hp3dd8tgy" path="res://scripts/slot.gd" id="5_n40cg"]
 [ext_resource type="ArrayMesh" uid="uid://c32w4pf12tx0m" path="res://voxels/bronze_small_item.vox" id="5_y2sko"]
-[ext_resource type="Texture2D" uid="uid://c5ii8veg0bvn" path="res://voxels/Remake_image_in_916_1c0eeb3bc4.jpeg" id="6_mo806"]
+[ext_resource type="Texture2D" path="res://voxels/Remake_image_in_916_1c0eeb3bc4.jpeg" id="6_mo806"]
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="6_y2sko"]
-[ext_resource type="ArrayMesh" uid="uid://bwa54rb5c105r" path="res://voxels/bronze_medium_item.vox" id="9_txblw"]
-[ext_resource type="ArrayMesh" uid="uid://dx6jc4uuscksy" path="res://voxels/bronze_large_item.vox" id="10_n5qna"]
+[ext_resource type="Texture2D" uid="uid://b1nm2g31sd05c" path="res://voxels/smallPlaceholder.jpg" id="8_sryfu"]
+[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="9_6mqrs"]
+[ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="11_6mqrs"]
+[ext_resource type="Texture2D" uid="uid://c7tw0aexc3fl3" path="res://voxels/largePlaceholder.jpg" id="12_k8rms"]
 
 [sub_resource type="Environment" id="Environment_mv13s"]
 ambient_light_source = 2
@@ -57,12 +60,6 @@ size = Vector3(1.4292603, 1.2254028, 4.1168213)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
 points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n5qna"]
-points = PackedVector3Array(-4, 0, -3.5, -4, 0, 3.2997656, -4, 0.19998042, -3.5, 3.699295, 0, -3.5, -4, 0.19998042, 3.2997656, -3.9005482, 0, 3.4999223, -3.9005482, 0.3, -3.4006166, 3.699295, 0.19998042, -3.5, 3.899765, 0, -3.4006166, -3.9005482, 0.19998042, 3.4999223, -3.9005482, 0.3, 3.199687, -3.7000782, 0, 3.6000004, 3.5998435, 0.3, -3.4006166, 3.899765, 0.19998042, -3.4006166, 4, 0, -3.20046, -3.7000782, 0.19998042, 3.6000004, -3.6006265, 0.3, 3.4999223, -3.8003132, 0.3, 3.3998437, 4, 0, 3.6000004, 3.79953, 0.3, -3.3005383, 4, 0.19998042, -3.20046, 4, 0.19998042, 3.6000004, 3.899765, 0.3, 3.4999223, 3.899765, 0.3, -3.1003819)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d6xj2"]
-points = PackedVector3Array(-6, 0, -3.5, -6, 0, 3.2997656, -6, 0.19998042, -3.5, 5.699295, 0, -3.5, -6, 0.19998042, 3.2997656, -5.9001565, 0, 3.4999223, -5.9001565, 0.3, -3.4006166, 5.699295, 0.19998042, -3.5, 5.898982, 0, -3.4006166, -5.9001565, 0.19998042, 3.4999223, -5.9001565, 0.3, 3.199687, -5.70047, 0, 3.6000004, 5.599452, 0.3, -3.4006166, 5.898982, 0.19998042, -3.4006166, 6, 0, -3.20046, -5.70047, 0.19998042, 3.6000004, -5.800313, 0.3, 3.3998437, 6, 0, 3.6000004, 5.799139, 0.3, -3.3005383, 6, 0.19998042, -3.20046, -5.6006265, 0.3, 3.4999223, 6, 0.19998042, 3.6000004, 5.898982, 0.3, -3.1003819, 5.898982, 0.3, 3.4999223)
-
 [node name="Node3D" type="Node3D" unique_id=803403698]
 script = ExtResource("1_3uyx6")
 
@@ -88,6 +85,7 @@ libraries/ = SubResource("AnimationLibrary_mo806")
 
 [node name="onGorund" type="Node3D" parent="." unique_id=1331164376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 0)
+script = ExtResource("5_d6xj2")
 
 [node name="slot1" type="Area3D" parent="onGorund" unique_id=838990134 node_paths=PackedStringArray("inventory")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8413177, 0, 2.435626)
@@ -180,7 +178,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="onStash" type="Node3D" parent="." unique_id=1650304631]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 5.863124)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 6.695134)
 
 [node name="slot1" type="Area3D" parent="onStash" unique_id=228968215 node_paths=PackedStringArray("inventory")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8413177, 0, 2.435626)
@@ -272,58 +270,67 @@ inventory = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
 shape = SubResource("BoxShape3D_mo806")
 
-[node name="BronzeSmallItemteste" type="StaticBody3D" parent="." unique_id=860416543 node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.788, 0.5, 8.7839775)
+[node name="ItemTest1" type="StaticBody3D" parent="." unique_id=860416543 node_paths=PackedStringArray("camera")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.788, 0.5, 9.354283)
 script = ExtResource("6_y2sko")
+itemName = "TESTE"
+itemImage = ExtResource("8_sryfu")
 camera = NodePath("../Camera3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeSmallItemteste" unique_id=1869814656]
+[node name="Shape" type="MeshInstance3D" parent="ItemTest1" unique_id=340590917]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
+mesh = ExtResource("9_6mqrs")
+
+[node name="Image" type="Sprite3D" parent="ItemTest1/Shape" unique_id=1981041922]
+transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
+flip_h = true
+texture = ExtResource("6_mo806")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemTest1" unique_id=1869814656]
 shape = SubResource("ConvexPolygonShape3D_n40cg")
 
-[node name="BronzeSmallItem" type="MeshInstance3D" parent="BronzeSmallItemteste" unique_id=340590917]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-mesh = ExtResource("5_y2sko")
-
-[node name="Sprite3D" type="Sprite3D" parent="BronzeSmallItemteste/BronzeSmallItem" unique_id=1981041922]
-transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
-texture = ExtResource("6_mo806")
-
-[node name="BronzeMediumItemteste" type="StaticBody3D" parent="." unique_id=1433476211 node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.353, 0.5, 8.784)
+[node name="ItemTest2" type="StaticBody3D" parent="." unique_id=1566673885 node_paths=PackedStringArray("camera")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.2427278, 0.5, 9.354283)
 script = ExtResource("6_y2sko")
+itemName = "TESTE"
+itemImage = ExtResource("11_6mqrs")
 camera = NodePath("../Camera3D")
 slots_necessarios = 2
+tier = 1
 
-[node name="BronzeSmallItem" type="MeshInstance3D" parent="BronzeMediumItemteste" unique_id=1248458526]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-mesh = ExtResource("9_txblw")
+[node name="Shape" type="MeshInstance3D" parent="ItemTest2" unique_id=1398296875]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
+mesh = ExtResource("5_y2sko")
 
-[node name="Sprite3D" type="Sprite3D" parent="BronzeMediumItemteste/BronzeSmallItem" unique_id=5722383]
-transform = Transform3D(-0.94, -1.4193606e-07, 6.204222e-15, 0, -4.1088704e-08, -0.94, 1.4193606e-07, -0.94, 4.1088704e-08, 0, 0, 0)
+[node name="Image" type="Sprite3D" parent="ItemTest2/Shape" unique_id=1269165774]
+transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
+flip_h = true
 texture = ExtResource("6_mo806")
-region_enabled = true
-region_rect = Rect2(0, 331.15, 768, 702.49)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeMediumItemteste" unique_id=1668022530]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_n5qna")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemTest2" unique_id=10688786]
+shape = SubResource("ConvexPolygonShape3D_n40cg")
 
-[node name="BronzeLargeItemteste" type="StaticBody3D" parent="." unique_id=1164238368 node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.377, 0.5, 8.784)
+[node name="ItemTest3" type="StaticBody3D" parent="." unique_id=143857109 node_paths=PackedStringArray("camera")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.107226074, 0.5, 9.354283)
 script = ExtResource("6_y2sko")
+itemName = "TESTE"
+itemImage = ExtResource("12_k8rms")
 camera = NodePath("../Camera3D")
 slots_necessarios = 3
+tier = 4
 
-[node name="BronzeSmallItem" type="MeshInstance3D" parent="BronzeLargeItemteste" unique_id=1272851677]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-mesh = ExtResource("10_n5qna")
+[node name="Shape" type="MeshInstance3D" parent="ItemTest3" unique_id=458462163]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
+mesh = ExtResource("5_y2sko")
 
-[node name="Sprite3D" type="Sprite3D" parent="BronzeLargeItemteste/BronzeSmallItem" unique_id=321388529]
-transform = Transform3D(-0.94, -1.4193606e-07, 6.204222e-15, 0, -4.1088704e-08, -0.94, 1.4193606e-07, -0.94, 4.1088704e-08, 0, 0, 0)
+[node name="Image" type="Sprite3D" parent="ItemTest3/Shape" unique_id=316757259]
+transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
+flip_h = true
 texture = ExtResource("6_mo806")
-region_enabled = true
-region_rect = Rect2(0, 331.15, 768, 702.49)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BronzeLargeItemteste" unique_id=876809128]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_d6xj2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemTest3" unique_id=1481484327]
+shape = SubResource("ConvexPolygonShape3D_n40cg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1830808997]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20.485764, 0)
+shadow_enabled = true

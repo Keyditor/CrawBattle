@@ -1,9 +1,18 @@
 extends StaticBody3D
+
+@export var itemName : String
+@export var itemImage : Texture2D
 @export var camera: Camera3D
 @export var float_height := 0.8
 @export var base_y := 0.5
 @export var return_speed := 6.0
 @export var slots_necessarios: int = 1
+@export_range(0,4,1) var tier : int = 0
+
+@onready var mesh_instance: MeshInstance3D = $Shape
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var sprite: Sprite3D = $Shape/Image
+
 var slots_reservados: Array = []
 var slots_encostando: Array = []
 var slot_escolhido = null
@@ -20,6 +29,7 @@ func _input(event):
 				if is_mouse_over():
 					start_drag()
 					print("sobe")
+					
 			else:
 				stop_drag()
 				print("desce")
@@ -41,6 +51,12 @@ func stop_drag():
 	global_position.y = base_y
 	print(global_position.y)
 	atualizar_snap()
+
+func followto(_side): #futura função para reorganização
+	pass
+
+func look_free_slot(): #futura função para reoorganização
+	pass
 
 func move_to_mouse():
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -144,8 +160,52 @@ func liberar_slots_anteriores():
 			slot.liberar()
 	slots_reservados.clear()
 
+func aplicar_material(mat):
+	for i in range(mesh_instance.mesh.get_surface_count()):
+		print("setting")
+		mesh_instance.set_surface_override_material(i, mat)
+		#mesh_instance.material_override = mat
+		#mesh_instance.mesh.surface_set_material(0, mat)
+
+
+func colorNshade():
+	var mat
+	
+	match tier:
+		0: mat = preload("res://shaders/bronze_itens.tres")
+		1: mat = preload("res://shaders/silver_itens.tres")
+		2: mat = preload("res://shaders/gold_itens.tres")
+		3: mat = preload("res://shaders/platina_itens.tres")
+		4: mat = preload("res://shaders/rainbow.gdshader")
+	aplicar_material(mat)
+	print(mesh_instance)
+	print(mesh_instance.name)
+
+func resizer(_slots):
+	match _slots:
+		1:
+			mesh_instance.mesh = preload("res://materials/smalItem.mesh")
+			var createShape = mesh_instance.mesh.create_convex_shape()
+			collision_shape.shape = createShape
+		2:
+			mesh_instance.mesh = preload("res://materials/mediumItem.mesh")
+			var createShape = mesh_instance.mesh.create_convex_shape()
+			collision_shape.shape = createShape
+		3:
+			mesh_instance.mesh = preload("res://voxels/bronze_large_item.vox")
+			var createShape = mesh_instance.mesh.create_convex_shape()
+			collision_shape.shape = createShape
+			
+	colorNshade()
+
+func imager():
+	sprite.texture = itemImage
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await get_tree().process_frame
+	resizer(slots_necessarios)
+	imager()
 	ultima_posicao_valida = global_position
 	global_position.y = base_y
 	target_y = base_y

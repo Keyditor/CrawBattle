@@ -29,6 +29,7 @@ enabled=PackedStringArray("res://addons/VoxelSurport/plugin.cfg", "res://addons/
 folder_colors={
 "res://scenes/": "purple",
 "res://scripts/": "red",
+"res://shaders/": "green",
 "res://voxels/": "orange"
 }
 
