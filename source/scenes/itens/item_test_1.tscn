@@ -5,14 +5,45 @@
 [ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="3_dxdcr"]
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
 
+[sub_resource type="SystemFont" id="SystemFont_xfg7t"]
+font_names = PackedStringArray("Roboto")
+font_weight = 999
+font_stretch = 200
+subpixel_positioning = 0
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
 points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xfg7t"]
+viewport_path = NodePath("SubViewport")
+
 [node name="ItemTest1" type="StaticBody3D" unique_id=578422450]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_xfg7t")
 itemName = "TESTE"
 itemImage = ExtResource("2_mabah")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport" unique_id=220401712]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 29
+theme_override_fonts/normal_font = SubResource("SystemFont_xfg7t")
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[color=red]9999[/color] [color=yellow]9999[/color] [color=green]9999[/color]"
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="Shape" type="MeshInstance3D" parent="." unique_id=946136437]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
@@ -27,7 +58,12 @@ texture = ExtResource("4_ckac4")
 shape = SubResource("ConvexPolygonShape3D_n40cg")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1323496885]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 3.333333, 0)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, 3.2948053, 0)
 billboard = 1
 text = "PLACEHOLDER"
 font_size = 142
+outline_size = 79
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=358347564]
+transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.43333924, -1.0148818)
+texture = SubResource("ViewportTexture_xfg7t")

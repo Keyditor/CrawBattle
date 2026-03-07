@@ -7,6 +7,7 @@ extends StaticBody3D
 @export var base_y := 0.5
 @export var return_speed := 6.0
 @export var slots_necessarios: int = 1
+@export var base_cooldown : int = 1
 @export_range(0,4,1) var tier : int = 0
 
 @onready var mesh_instance: MeshInstance3D = $Shape
@@ -38,6 +39,12 @@ func _input(event):
 				#print("desce")
 
 func _process(delta):
+	if Input.is_action_just_pressed("C"):
+		spawn_particle(
+			self.global_position,
+			Vector3(8.5,0,-5.6),
+			Color.DARK_RED
+		)
 	if Game.checkUpgrade:
 		print("dando upgrade consecutivo")
 		var upItem = existe_item_igual()
@@ -248,6 +255,11 @@ func upgrade(item):
 		print(adding)
 		queue_free()
 		Game.queueUpgrade()
+
+func spawn_particle(start: Vector3, target: Vector3, color: Color):
+	var particle = preload("res://scenes/effects/particle_arc.tscn").instantiate()
+	get_tree().current_scene.add_child(particle)
+	particle.setup(start, target, color)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

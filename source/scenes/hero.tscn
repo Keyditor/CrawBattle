@@ -6,24 +6,28 @@
 [ext_resource type="ArrayMesh" uid="uid://c4wfavfhhheca" path="res://voxels/battleground_hp2.vox" id="4_y2sko"]
 [ext_resource type="Script" uid="uid://dx3c2xfiebw8i" path="res://scenes/inventory.gd" id="5_d6xj2"]
 [ext_resource type="Script" uid="uid://wv8hp3dd8tgy" path="res://scripts/slot.gd" id="5_n40cg"]
+[ext_resource type="PackedScene" uid="uid://c73yubsow46qs" path="res://scenes/itens/item_test_1.tscn" id="7_mo806"]
 
 [sub_resource type="Environment" id="Environment_mv13s"]
 ambient_light_source = 2
 ambient_light_color = Color(0.9999997, 0.9392913, 0.8985532, 1)
+
+[sub_resource type="Animation" id="Animation_n40cg"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_w7pyx"]
 resource_name = "to_ground"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector3(-1.4835298, 0, 0), Vector3(-1.0471976, 0, 0)]
+"values": [Vector3(-0.145, 9.956, 13.462), Vector3(-0.145, 9.956, 5.782)]
 }
 
 [sub_resource type="Animation" id="Animation_y2sko"]
@@ -31,18 +35,19 @@ resource_name = "to_stash"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector3(-1.0471976, 0, 0), Vector3(-1.4835298, 0, 0)]
+"values": [Vector3(-0.145, 9.956, 5.782), Vector3(-0.145, 9.956, 13.462)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mo806"]
 _data = {
+&"RESET": SubResource("Animation_n40cg"),
 &"to_ground": SubResource("Animation_w7pyx"),
 &"to_stash": SubResource("Animation_y2sko")
 }
@@ -64,8 +69,10 @@ visible = false
 mesh = ExtResource("4_y2sko")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1317883178]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, -1, 9.641, 7.052)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, -0.145, 9.956, 5.782)
+projection = 1
 fov = 65.1
+size = 13.693
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1761050516]
 environment = SubResource("Environment_mv13s")
@@ -266,3 +273,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2
 shadow_enabled = true
 directional_shadow_blend_splits = true
 sky_mode = 1
+
+[node name="ItemTest1" parent="." unique_id=578422450 instance=ExtResource("7_mo806")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -5.0914574, 0.39808607, 2.4158812)
+itemName = "CU"
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1187733544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.518184, 0, -5.666626)
