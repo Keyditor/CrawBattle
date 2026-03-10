@@ -1,6 +1,7 @@
 extends Node
 
 @onready var timer := Timer.new()
+signal itemUpgrade(item,caller)
 
 var itemSemSlot = false
 var checkUpgrade = false
@@ -10,9 +11,9 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func queueUpgrade():
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.3).timeout
 	checkUpgrade=true
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.3).timeout
 	checkUpgrade=false
 	
 

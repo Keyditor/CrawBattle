@@ -48,15 +48,12 @@ func _process(delta):
 		spawn_particle(
 			self.global_position,
 			Vector3(8.5,0,-5.6),
-			Color.DARK_RED
+			Color.DARK_ORANGE
 		)
-	if Game.checkUpgrade:
-		print("dando upgrade consecutivo")
-		var upItem = existe_item_igual()
-		if upItem:
-			print(upItem.name,"",upItem.tier)
-			upgrade(upItem)
-			Game.checkUpgrade = false
+	if Game.checkUpgrade and tier != 4:
+		print(self.name,": dando upgrade consecutivo")
+		var uItem = existe_item_igual()
+		if uItem!=self: Game.itemUpgrade.emit(uItem, self); Game.checkUpgrade = false
 		print("desligando upgrade")
 	if !slots_reservados and !adding:
 		label.text = "Posicione o item em um slot vazio!"
@@ -231,35 +228,48 @@ func existe_item_igual():
 		if node != self and node.itemName == itemName and node.tier == tier:
 			print("encontrou o item")
 			print(adding)
+			Game.itemUpgrade.emit(node)
 			return node
 	
-	return false
+	return self
 
 func imager():
 	sprite.texture = itemImage
 
-func upgrade(item):
-	if item.tier !=4:
-		set_process(false)
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_CUBIC)
-		tween.set_ease(Tween.EASE_IN_OUT)
+func _eomesmo(item):
+	print("eomesmo start")
+	if item != self and item.itemName == itemName and item.tier == tier:
+		print(self.name,": é")
+		upgrade(item,self)
+		return
+	else: print(self.name,": É nada")
 
-		tween.tween_property(
-		self,
-		"global_position",
-		item.global_position,
-		0.3
-		)
+func upgrade(item,caller):
+	if item:
+		if item != caller:
+			if item.tier !=4:
+				#set_process(false)
+				var tween = create_tween()
+				tween.set_trans(Tween.TRANS_CUBIC)
+				tween.set_ease(Tween.EASE_IN_OUT)
 
-		await tween.finished
-		if is_instance_valid(item):
-			item.tier +=1
-			item.colorNshade()
-		adding = false
-		print(adding)
-		queue_free()
-		Game.queueUpgrade()
+				tween.tween_property(
+				self,
+				"global_position",
+				item.global_position,
+				0.3
+				)
+
+				await tween.finished
+				if is_instance_valid(item):
+					item.tier +=1
+					item.colorNshade()
+				adding = false
+				print(adding)
+				queue_free()
+				Game.queueUpgrade()
+				#set_process(true)
+	else: return
 
 func spawn_particle(start: Vector3, target: Vector3, color: Color):
 	var particle = preload("res://scenes/effects/particle_arc.tscn").instantiate()
@@ -268,6 +278,8 @@ func spawn_particle(start: Vector3, target: Vector3, color: Color):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(self.name)
+	Game.itemUpgrade.connect(_eomesmo)
 	label.text = ""
 	add_to_group("items")
 	await get_tree().process_frame
@@ -281,6 +293,7 @@ func _ready() -> void:
 	if has_node("../Camera3D"):
 		camera = $"../Camera3D"
 	var nItem = existe_item_igual()
-	if nItem:
-		upgrade(nItem)
-	pass # Replace with function body.
+	#Game.queueUpgrade()
+	Game.itemUpgrade.emit(nItem, self)
+	for t in get_tree().get_nodes_in_group("items"):
+		print(t.itemName," - ",t.tier)

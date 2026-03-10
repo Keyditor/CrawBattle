@@ -56,6 +56,8 @@ func AddPoison(n,c=false):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if battle:
+		pass
 	if Input.is_action_just_pressed("ui_accept") and not anim.is_playing():
 		print("press: ui_accept")
 		if camPos == "ground":
@@ -69,8 +71,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		var test = preload("res://scenes/itens/item_test_1.tscn")
 		var instancia = test.instantiate()
-		instancia.slots_necessarios = 3
-		instancia.itemImage = preload("res://voxels/largePlaceholder.jpg")
+		instancia.slots_necessarios = 1
+		instancia.itemImage = preload("res://voxels/smallPlaceholder.jpg")
 		instancia.tier = 0
 		add_child(instancia)
 	pass
