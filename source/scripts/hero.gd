@@ -1,9 +1,13 @@
 extends Node3D
 @export var health : float
+var shield : float
+var burn : int
+var poison : int
 @export var wins : int
 @export var loses : int
 @onready var cam = $Camera3D
 @onready var anim = $AnimationPlayer
+var battle = false
 var camPos = "ground"
 var bagSlots = 9
 var groundSlots = 9
@@ -20,7 +24,35 @@ func _ready() -> void:
 	
 	pass # Replace with function body.
 
+func damage(n,c=false):
+	if c:
+		health -= n
+	else:
+		health -= n
 
+func heal(n,c=false):
+	if c:
+		health += n
+	else:
+		health += n
+
+func addShield(n,c=false):
+	if c:
+		shield += n
+	else:
+		shield += n
+
+func addBurn(n,c=false):
+	if c:
+		burn += n
+	else:
+		burn += n
+
+func AddPoison(n,c=false):
+	if c:
+		poison += n
+	else:
+		poison += n
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

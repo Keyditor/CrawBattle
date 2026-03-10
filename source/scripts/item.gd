@@ -1,6 +1,9 @@
 extends StaticBody3D
+class_name Item
+enum _Types {Melee, Ranged, Armor, Ring, Charm, Cape, Pet}
 
 @export var itemName : String
+@export_multiline("Descrição do item") var itemDescription : String
 @export var itemImage : Texture2D
 @export var camera: Camera3D
 @export var float_height := 0.8
@@ -8,6 +11,8 @@ extends StaticBody3D
 @export var return_speed := 6.0
 @export var slots_necessarios: int = 1
 @export var base_cooldown : int = 1
+@export var types : Array[_Types]
+@export var effects : Array[ItemEffects]
 @export_range(0,4,1) var tier : int = 0
 
 @onready var mesh_instance: MeshInstance3D = $Shape
