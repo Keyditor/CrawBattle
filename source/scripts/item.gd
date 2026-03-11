@@ -15,6 +15,10 @@ enum _Types {Melee, Ranged, Armor, Ring, Charm, Cape, Pet}
 @export var effects : Array[ItemEffects]
 @export_range(0,4,1) var tier : int = 0
 
+@onready var damageUI = $SubViewport/HBoxContainer/Damage
+@onready var shieldUI = $SubViewport/HBoxContainer/Shield
+@onready var burnUI = $SubViewport/HBoxContainer/Burn
+@onready var poisonUI = $SubViewport/HBoxContainer/Poison
 @onready var mesh_instance: MeshInstance3D = $Shape
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var sprite: Sprite3D = $Shape/Image
@@ -30,6 +34,8 @@ var drag_plane : Plane
 var dragging := false
 var is_floating := false
 var target_y := base_y
+var hero
+var target
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -45,11 +51,30 @@ func _input(event):
 
 func _process(delta):
 	if Input.is_action_just_pressed("C"):
-		spawn_particle(
+		await spawn_particle(
 			self.global_position,
 			Vector3(8.5,0,-5.6),
 			Color.DARK_ORANGE
 		)
+		await get_tree().create_timer(0.55).timeout
+		for node in get_tree().get_nodes_in_group("hero"):
+			hero = node
+		for node in get_tree().get_nodes_in_group("enemie"):
+			target = node
+		for e in effects:
+			e.apply(hero, self, target)
+	
+	
+	for e in effects:
+		if e is WeaponEffects:
+			damageUI.text = str("[color=red]",e.damage*(tier+1),"[/color]")
+		#if e.shield:
+		#	shieldUI.text = str("[color=blue]",e.shield,"[/color]")
+		#if e.burn:
+		#	burnUI.text = str("[color=orange]",e.burn,"[/color]")
+		#if e.poison:
+		#	poisonUI.text = str("[color=purple]",e.poison,"[/color]")
+	
 	if Game.checkUpgrade and tier != 4:
 		print(self.name,": dando upgrade consecutivo")
 		var uItem = existe_item_igual()
@@ -278,6 +303,22 @@ func spawn_particle(start: Vector3, target: Vector3, color: Color):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	damageUI.visible = false
+	shieldUI.visible = false
+	burnUI.visible = false
+	poisonUI.visible = false
+	for no in get_tree().get_nodes_in_group("enemie"):
+		target = no
+	for e in effects:
+		if e is WeaponEffects:
+			damageUI.text = str("[color=red]",e.damage*tier,"[/color]")
+			damageUI.visible = true
+		#if e.shield:
+		#	shieldUI.text = str("[color=blue]",e.shield,"[/color]")
+		#if e.burn:
+		#	burnUI.text = str("[color=orange]",e.burn,"[/color]")
+		#if e.poison:
+		#	poisonUI.text = str("[color=purple]",e.poison,"[/color]")
 	print(self.name)
 	Game.itemUpgrade.connect(_eomesmo)
 	label.text = ""

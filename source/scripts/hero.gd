@@ -1,12 +1,16 @@
 extends Node3D
-@export var health : float
-var shield : float
+@export var health : int
+var shield : int
 var burn : int
 var poison : int
 @export var wins : int
 @export var loses : int
 @onready var cam = $Camera3D
 @onready var anim = $AnimationPlayer
+@onready var uiVida = $HeroHp/SubViewport/HBoxContainer/Vida
+@onready var uiShield = $HeroHp/SubViewport/HBoxContainer/Shield
+@onready var uiBurn = $HeroHp/SubViewport/HBoxContainer/Burn
+@onready var uiPoison = $HeroHp/SubViewport/HBoxContainer/Poison
 var battle = false
 var camPos = "ground"
 var bagSlots = 9
@@ -14,13 +18,15 @@ var groundSlots = 9
 var bag = []
 var ground = []
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Game.tickEnable = true
 	bag.resize(bagSlots)
 	bag.fill(null)
 	ground.resize(groundSlots)
 	ground.fill(null)
-	
+	add_to_group("hero")
 	
 	pass # Replace with function body.
 
@@ -56,6 +62,19 @@ func AddPoison(n,c=false):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	
+	uiVida.text = str(health)
+	uiShield.text = str(shield)
+	uiBurn.text = str(burn)
+	uiPoison.text = str(poison)
+	if shield <= 0: uiShield.visible = false
+	else: uiShield.visible = true
+	if burn <= 0: uiBurn.visible = false
+	else: uiBurn.visible = true
+	if poison <= 0: uiPoison.visible = false
+	else: uiPoison.visible = true
+	
 	if battle:
 		pass
 	if Input.is_action_just_pressed("ui_accept") and not anim.is_playing():

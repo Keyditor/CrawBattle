@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Game="*uid://cawrt1qujyqiq"
-ItemMechanics="*uid://cwg7g8n4kveot"
+GlobalTick="*uid://dnxnu75rp30fp"
 
 [display]
 

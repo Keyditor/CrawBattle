@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ux7ri8hdryc3" path="res://scripts/enemie.gd" id="4_n40cg"]
 [ext_resource type="Script" uid="uid://dx3c2xfiebw8i" path="res://scenes/inventory.gd" id="5_d6xj2"]
 [ext_resource type="Script" uid="uid://wv8hp3dd8tgy" path="res://scripts/slot.gd" id="5_n40cg"]
-[ext_resource type="PackedScene" uid="uid://b14kmuyvy2cev" path="res://scenes/DamageIndicator.tscn" id="6_y2sko"]
+[ext_resource type="Script" uid="uid://c131f5g44ueea" path="res://scripts/damage_indicator.gd" id="7_mo806"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mo806"]
 viewport_path = NodePath("EnemieHp/SubViewport")
@@ -87,12 +87,10 @@ health = 450
 mesh = ExtResource("2_mv13s")
 
 [node name="EnemieHp" type="Node3D" parent="." unique_id=26913803]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -5)
 script = ExtResource("4_n40cg")
-health = 800
 
 [node name="Sprite3D" type="Sprite3D" parent="EnemieHp" unique_id=2104969525]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -8.098, 0.272, -0.323)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.095, 0.272, -5.335)
 texture = SubResource("ViewportTexture_mo806")
 
 [node name="SubViewport" type="SubViewport" parent="EnemieHp" unique_id=1256205531]
@@ -107,7 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y2sko")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mo806")
-value = 100.0
+value = 20.0
 show_percentage = false
 
 [node name="ShieldBar" type="ProgressBar" parent="EnemieHp/SubViewport" unique_id=1747401320]
@@ -119,7 +117,6 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y2sko")
 theme_override_styles/fill = SubResource("StyleBoxFlat_n40cg")
 value = 9.99
-allow_greater = true
 show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EnemieHp/SubViewport" unique_id=204585549]
@@ -207,10 +204,10 @@ autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="HeroHp" type="Node3D" parent="." unique_id=839657753]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 0.165, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="HeroHp" unique_id=29079921]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.1, 0.267, 0.355)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.127, 5.37)
 texture = SubResource("ViewportTexture_n40cg")
 
 [node name="SubViewport" type="SubViewport" parent="HeroHp" unique_id=1178832402]
@@ -225,7 +222,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y2sko")
 theme_override_styles/fill = SubResource("StyleBoxFlat_txblw")
-value = 100.0
+value = 20.0
 show_percentage = false
 
 [node name="ShieldBar" type="ProgressBar" parent="HeroHp/SubViewport" unique_id=724726020]
@@ -237,7 +234,6 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y2sko")
 theme_override_styles/fill = SubResource("StyleBoxFlat_n40cg")
 value = 6.75
-allow_greater = true
 show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HeroHp/SubViewport" unique_id=352589005]
@@ -533,6 +529,11 @@ sky_mode = 1
 [node name="Node3D" type="Node3D" parent="." unique_id=1187733544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.518184, 0, -5.666626)
 
-[node name="DamageIndicator" parent="." unique_id=1910576094 instance=ExtResource("6_y2sko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -5)
-visible = false
+[node name="DamageIndicator" type="Node3D" parent="." unique_id=1263773148]
+script = ExtResource("7_mo806")
+
+[node name="SubViewport" type="SubViewport" parent="DamageIndicator" unique_id=494085503]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DamageIndicator/SubViewport" unique_id=969275420]
+offset_right = 40.0
+offset_bottom = 40.0

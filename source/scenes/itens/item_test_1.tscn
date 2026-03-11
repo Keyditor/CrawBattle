@@ -10,7 +10,8 @@
 [sub_resource type="Resource" id="Resource_10bed"]
 script = ExtResource("4_tswfj")
 damage = 15
-crit = 1
+tier_upgade = 15
+crit = 50
 metadata/_custom_type_script = "uid://dl6vwtj6bs5uh"
 
 [sub_resource type="SystemFont" id="SystemFont_xfg7t"]
@@ -35,14 +36,22 @@ effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_10bed")])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
 transparent_bg = true
+size = Vector2i(688, 514)
 render_target_update_mode = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport" unique_id=220401712]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport" unique_id=1438848455]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.0
+offset_right = 288.0
+offset_bottom = 72.0
 grow_horizontal = 2
-grow_vertical = 2
+alignment = 1
+
+[node name="Damage" type="RichTextLabel" parent="SubViewport/HBoxContainer" unique_id=220401712]
+clip_contents = false
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
@@ -51,7 +60,56 @@ theme_override_constants/outline_size = 29
 theme_override_fonts/normal_font = SubResource("SystemFont_xfg7t")
 theme_override_font_sizes/normal_font_size = 61
 bbcode_enabled = true
-text = "[color=red]9999[/color] [color=yellow]9999[/color] [color=green]9999[/color]"
+text = "[color=red]9999[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Shield" type="RichTextLabel" parent="SubViewport/HBoxContainer" unique_id=1328417857]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 29
+theme_override_fonts/normal_font = SubResource("SystemFont_xfg7t")
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[color=blue]9999[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Burn" type="RichTextLabel" parent="SubViewport/HBoxContainer" unique_id=2050310590]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 29
+theme_override_fonts/normal_font = SubResource("SystemFont_xfg7t")
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[color=orange]9999[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Poison" type="RichTextLabel" parent="SubViewport/HBoxContainer" unique_id=1570531001]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 29
+theme_override_fonts/normal_font = SubResource("SystemFont_xfg7t")
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[color=purple]9999[/color]"
+fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
