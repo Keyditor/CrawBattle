@@ -32,8 +32,8 @@ func apply(_user, _item, _target):
 		if critRoll <= crit:
 			_user.heal((damage*(_item.tier+1))*2,toCrit)
 			_user.get_tree().current_scene.add_child(lst)
-			lst.setup((damage*(_item.tier+1))*2, Vector3.LEFT, Color.GREEN, toCrit, _user)
+			lst.setup((damage*(_item.tier+1))*2, Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)
 		else:
 			_user.heal(damage*(_item.tier+1))
 			_user.get_tree().current_scene.add_child(lst)
-			lst.setup(damage*(_item.tier+1), Vector3.LEFT, Color.GREEN, toCrit, _user)
+			lst.setup(damage*(_item.tier+1), Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)

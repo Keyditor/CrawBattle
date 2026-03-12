@@ -8,6 +8,7 @@ var _accumulator := 0.0
 var _half_toggle := false
 
 func _process(delta):
+	#print("ticking: ",_accumulator," | ",seconds)
 	if Game.tickEnable:
 		_accumulator += delta
 		

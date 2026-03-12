@@ -89,7 +89,7 @@ mesh = ExtResource("2_mv13s")
 [node name="EnemieHp" type="Node3D" parent="." unique_id=26913803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -5)
 script = ExtResource("4_n40cg")
-health = 800
+health = 2500
 
 [node name="Sprite3D" type="Sprite3D" parent="EnemieHp" unique_id=2104969525]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -8.098, 0.272, -0.323)

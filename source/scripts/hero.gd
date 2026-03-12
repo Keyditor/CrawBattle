@@ -1,5 +1,6 @@
 extends Node3D
 @export var health : int
+var maxHealth : int
 var shield : int
 var burn : int
 var poison : int
@@ -7,10 +8,13 @@ var poison : int
 @export var loses : int
 @onready var cam = $Camera3D
 @onready var anim = $AnimationPlayer
+@onready var healthBar = $HeroHp/SubViewport/HealthBar
+@onready var shieldBar = $HeroHp/SubViewport/ShieldBar
 @onready var uiVida = $HeroHp/SubViewport/HBoxContainer/Vida
 @onready var uiShield = $HeroHp/SubViewport/HBoxContainer/Shield
 @onready var uiBurn = $HeroHp/SubViewport/HBoxContainer/Burn
 @onready var uiPoison = $HeroHp/SubViewport/HBoxContainer/Poison
+@onready var userPos = $HeroHp
 var battle = false
 var camPos = "ground"
 var bagSlots = 9
@@ -21,6 +25,12 @@ var ground = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GlobalTick.half_tick.connect(_on_half_tick)
+	GlobalTick.tick.connect(_on_tick)
+	maxHealth = 1000
+	healthBar.max_value = maxHealth
+	shieldBar.value = 0
+	shieldBar.max_value = maxHealth
 	Game.tickEnable = true
 	bag.resize(bagSlots)
 	bag.fill(null)
@@ -29,6 +39,15 @@ func _ready() -> void:
 	add_to_group("hero")
 	
 	pass # Replace with function body.
+
+func _on_half_tick():
+	if burn < 0:
+		health -= burn
+		burn -= 1
+
+func _on_tick():
+	if poison < 0:
+		health -= poison
 
 func damage(n,c=false):
 	if c:
@@ -54,7 +73,7 @@ func addBurn(n,c=false):
 	else:
 		burn += n
 
-func AddPoison(n,c=false):
+func addPoison(n,c=false):
 	if c:
 		poison += n
 	else:
@@ -62,8 +81,11 @@ func AddPoison(n,c=false):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	
+	if health > maxHealth:
+		health = maxHealth
+	healthBar.max_value = maxHealth
+	healthBar.value = health
+	shieldBar.max_value = maxHealth
 	uiVida.text = str(health)
 	uiShield.text = str(shield)
 	uiBurn.text = str(burn)

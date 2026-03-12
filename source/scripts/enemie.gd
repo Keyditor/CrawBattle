@@ -24,12 +24,19 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_half_tick():
-	if burn < 0:
-		health -= burn
-		burn -= 1
+	#print("Tentando queimar")
+	if burn > 0:
+		if shield > 0:
+			shield -= burn
+			burn -= 1
+			#print("BURN!")
+		else:
+			health -= burn
+			burn -= 1
+			#print("BURN!")
 
 func _on_tick():
-	if poison < 0:
+	if poison > 0:
 		health -= poison
 
 func damage(n,c=false):
@@ -62,7 +69,7 @@ func addBurn(n,c=false):
 	else:
 		burn += n
 
-func AddPoison(n,c=false):
+func addPoison(n,c=false):
 	if c:
 		poison += n
 	else:

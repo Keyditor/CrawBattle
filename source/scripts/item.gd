@@ -70,10 +70,10 @@ func _process(delta):
 			damageUI.text = str("[color=red]",e.damage*(tier+1),"[/color]")
 		#if e.shield:
 		#	shieldUI.text = str("[color=blue]",e.shield,"[/color]")
-		#if e.burn:
-		#	burnUI.text = str("[color=orange]",e.burn,"[/color]")
-		#if e.poison:
-		#	poisonUI.text = str("[color=purple]",e.poison,"[/color]")
+		if e is BurnEffects:
+			burnUI.text = str("[color=orange]",e.burn*(tier+1),"[/color]")
+		if e is PoisonEffects:
+			poisonUI.text = str("[color=purple]",e.poison*(tier+1),"[/color]")
 	
 	if Game.checkUpgrade and tier != 4:
 		print(self.name,": dando upgrade consecutivo")
@@ -315,10 +315,12 @@ func _ready() -> void:
 			damageUI.visible = true
 		#if e.shield:
 		#	shieldUI.text = str("[color=blue]",e.shield,"[/color]")
-		#if e.burn:
-		#	burnUI.text = str("[color=orange]",e.burn,"[/color]")
-		#if e.poison:
-		#	poisonUI.text = str("[color=purple]",e.poison,"[/color]")
+		if e is BurnEffects:
+			burnUI.text = str("[color=orange]",e.burn,"[/color]")
+			burnUI.visible = true
+		if e is PoisonEffects:
+			poisonUI.text = str("[color=purple]",e.poison,"[/color]")
+			poisonUI.visible = true
 	print(self.name)
 	Game.itemUpgrade.connect(_eomesmo)
 	label.text = ""
