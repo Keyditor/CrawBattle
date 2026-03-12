@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
 [ext_resource type="Script" uid="uid://c83clw7da256o" path="res://scripts/burn_effects.gd" id="5_ckac4"]
 [ext_resource type="Script" uid="uid://drpoi12seot5u" path="res://scripts/poison_effects.gd" id="5_tswfj"]
+[ext_resource type="Script" uid="uid://dl6vwtj6bs5uh" path="res://scripts/weapon_effects.gd" id="6_tswfj"]
 
 [sub_resource type="Resource" id="Resource_tswfj"]
 script = ExtResource("5_ckac4")
@@ -17,9 +18,15 @@ metadata/_custom_type_script = "uid://c83clw7da256o"
 
 [sub_resource type="Resource" id="Resource_10bed"]
 script = ExtResource("5_tswfj")
-poison = 6
-upgrade_type = 1
+poison = 5
+tier_upgade = 1
 metadata/_custom_type_script = "uid://drpoi12seot5u"
+
+[sub_resource type="Resource" id="Resource_akw1l"]
+script = ExtResource("6_tswfj")
+damage = 10
+tier_upgade = 5
+metadata/_custom_type_script = "uid://dl6vwtj6bs5uh"
 
 [sub_resource type="SystemFont" id="SystemFont_xfg7t"]
 font_names = PackedStringArray("Roboto")
@@ -39,7 +46,7 @@ script = ExtResource("1_xfg7t")
 itemName = "TESTE"
 itemImage = ExtResource("2_mabah")
 types = Array[int]([0])
-effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_tswfj"), SubResource("Resource_10bed")])
+effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_tswfj"), SubResource("Resource_10bed"), SubResource("Resource_akw1l")])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
 transparent_bg = true

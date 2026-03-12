@@ -39,3 +39,17 @@ func apply(_user, _item, _target):
 	else:
 		_target.addPoison(poison*(_item.tier+1))
 		dmg.setup(poison*(_item.tier+1), Vector3.LEFT, Color.REBECCA_PURPLE, toCrit, _target)
+func updateValue (_item):
+	match upgrade_type: #corrigir problema de match com enum
+		0:
+			if _item.tier > 0:
+				newPoison = poison+tier_upgade*_item.tier
+				print("nb: ",newPoison)
+			else:
+				newPoison = poison
+				print("nb: ",newPoison)
+		1:
+			if _item.tier > 0:
+				newPoison = poison*(_item.tier+1)
+			else:
+				newPoison = poison

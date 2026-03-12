@@ -3,6 +3,7 @@ class_name WeaponEffects
 enum upgradeType {Add,Multi}
 
 @export var damage:int
+var newDamage:int = damage
 @export var tier_upgade:int
 @export var upgrade_type:upgradeType
 @export_range(1,100,1) var crit:int
@@ -21,19 +22,45 @@ func apply(_user, _item, _target):
 	if critRoll <= crit:
 		toCrit = true
 	else: toCrit = false
-	
+	match upgrade_type: #corrigir problema de match com enum
+		0:
+			if _item.tier > 0:
+				newDamage = damage+tier_upgade*_item.tier
+				print("nb: ",newDamage)
+			else:
+				newDamage = damage
+				print("nb: ",newDamage)
+		1:
+			if _item.tier > 0:
+				newDamage = damage*(_item.tier+1)
+			else:
+				newDamage = damage
 	if critRoll <= crit:
-		_target.damage((damage*(_item.tier+1))*2, toCrit)
-		dmg.setup((damage*(_item.tier+1))*2, Vector3.RIGHT, Color.RED, toCrit, _target)
+		_target.damage(newDamage*2, toCrit)
+		dmg.setup(newDamage*2, Vector3.RIGHT, Color.RED, toCrit, _target)
 	else:
-		_target.damage(damage*(_item.tier+1))
-		dmg.setup(damage*(_item.tier+1), Vector3.RIGHT, Color.RED, toCrit, _target)
+		_target.damage(newDamage)
+		dmg.setup(newDamage, Vector3.RIGHT, Color.RED, toCrit, _target)
 	if life_steal:
 		if critRoll <= crit:
-			_user.heal((damage*(_item.tier+1))*2,toCrit)
+			_user.heal(newDamage*2,toCrit)
 			_user.get_tree().current_scene.add_child(lst)
-			lst.setup((damage*(_item.tier+1))*2, Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)
+			lst.setup(newDamage*2, Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)
 		else:
-			_user.heal(damage*(_item.tier+1))
+			_user.heal(newDamage)
 			_user.get_tree().current_scene.add_child(lst)
-			lst.setup(damage*(_item.tier+1), Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)
+			lst.setup(newDamage, Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)
+func updateValue (_item):
+	match upgrade_type: #corrigir problema de match com enum
+		0:
+			if _item.tier > 0:
+				newDamage = damage+tier_upgade*_item.tier
+				print("nb: ",newDamage)
+			else:
+				newDamage = damage
+				print("nb: ",newDamage)
+		1:
+			if _item.tier > 0:
+				newDamage = damage*(_item.tier+1)
+			else:
+				newDamage = damage

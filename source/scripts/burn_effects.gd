@@ -12,7 +12,7 @@ var newBurn : int = burn
 var rng =  RandomNumberGenerator.new()
 
 func apply(_user, _item, _target):
-	newBurn = burn
+	#newBurn = burn
 	var dmg = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	#var lst = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	_target.get_tree().current_scene.add_child(dmg)
@@ -23,7 +23,7 @@ func apply(_user, _item, _target):
 	if critRoll <= crit:
 		toCrit = true
 	else: toCrit = false
-	match upgradeType: #corrigir problema de match com enum
+	match upgrade_type: #corrigir problema de match com enum
 		0:
 			if _item.tier > 0:
 				newBurn = burn+tier_upgade*_item.tier
@@ -42,3 +42,17 @@ func apply(_user, _item, _target):
 	else:
 		_target.addBurn(newBurn)
 		dmg.setup(newBurn, Vector3.LEFT, Color.DARK_ORANGE, toCrit, _target)
+func updateValue (_item):
+	match upgrade_type: #corrigir problema de match com enum
+		0:
+			if _item.tier > 0:
+				newBurn = burn+tier_upgade*_item.tier
+				print("nb: ",newBurn)
+			else:
+				newBurn = burn
+				print("nb: ",newBurn)
+		1:
+			if _item.tier > 0:
+				newBurn = burn*(_item.tier+1)
+			else:
+				newBurn = burn
