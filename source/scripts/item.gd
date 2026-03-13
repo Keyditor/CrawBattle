@@ -69,12 +69,14 @@ func _process(delta):
 		e.updateValue(self)
 		if e is WeaponEffects:
 			damageUI.text = str("[color=red]",e.newDamage,"[/color]")
-		#if e.shield:
-		#	shieldUI.text = str("[color=blue]",e.shield,"[/color]")
+		if e is ShieldEffects:
+			shieldUI.text = str("[color=blue]",e.newShield,"[/color]")
 		if e is BurnEffects:
 			burnUI.text = str("[color=orange]",e.newBurn,"[/color]")
 		if e is PoisonEffects:
 			poisonUI.text = str("[color=purple]",e.newPoison,"[/color]")
+		if e is HealEffects:
+			poisonUI.text = str("[color=green]",e.newPoison,"[/color]")
 	
 	if Game.checkUpgrade and tier != 4:
 		print(self.name,": dando upgrade consecutivo")

@@ -4,6 +4,7 @@ enum upgradeType {Add,Multi}
 
 @export var poison:int
 var newPoison : int = poison
+var bonusPoison : int
 @export var tier_upgade:int
 @export var upgrade_type:upgradeType
 @export_range(1,100,1) var crit:int
@@ -22,17 +23,17 @@ func apply(_user, _item, _target):
 	if critRoll <= crit:
 		toCrit = true
 	else: toCrit = false
-	match upgradeType: #corrigir problema de match com enum
+	match upgrade_type: #corrigir problema de match com enum
 		0:
 			if _item.tier > 0:
-				newPoison = poison+tier_upgade*_item.tier
+				newPoison = (poison+tier_upgade*_item.tier)+bonusPoison
 			else:
-				newPoison = poison
+				newPoison = poison+bonusPoison
 		1:
 			if _item.tier > 0:
-				newPoison = poison*(_item.tier+1)
+				newPoison = (poison*(_item.tier+1))+bonusPoison
 			else:
-				newPoison = poison
+				newPoison = poison+bonusPoison
 	if critRoll <= crit:
 		_target.addPoison((poison*(_item.tier+1))*2, toCrit)
 		dmg.setup((poison*(_item.tier+1))*2, Vector3.LEFT, Color.REBECCA_PURPLE, toCrit, _target)

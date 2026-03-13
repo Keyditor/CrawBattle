@@ -44,9 +44,16 @@ viewport_path = NodePath("SubViewport")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_xfg7t")
 itemName = "TESTE"
+itemDescription = null
 itemImage = ExtResource("2_mabah")
+float_height = null
+base_y = null
+return_speed = null
+slots_necessarios = null
+base_cooldown = null
 types = Array[int]([0])
 effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_tswfj"), SubResource("Resource_10bed"), SubResource("Resource_akw1l")])
+tier = null
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
 transparent_bg = true

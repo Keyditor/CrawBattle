@@ -4,6 +4,7 @@ enum upgradeType {Add,Multi}
 
 @export var damage:int
 var newDamage:int = damage
+var bonusDamage:int
 @export var tier_upgade:int
 @export var upgrade_type:upgradeType
 @export_range(1,100,1) var crit:int
@@ -22,19 +23,19 @@ func apply(_user, _item, _target):
 	if critRoll <= crit:
 		toCrit = true
 	else: toCrit = false
-	match upgrade_type: #corrigir problema de match com enum
+	match upgrade_type: 
 		0:
 			if _item.tier > 0:
-				newDamage = damage+tier_upgade*_item.tier
+				newDamage = (damage+tier_upgade*_item.tier)+bonusDamage
 				print("nb: ",newDamage)
 			else:
-				newDamage = damage
+				newDamage = damage+bonusDamage
 				print("nb: ",newDamage)
 		1:
 			if _item.tier > 0:
-				newDamage = damage*(_item.tier+1)
+				newDamage = (damage*(_item.tier+1))+bonusDamage
 			else:
-				newDamage = damage
+				newDamage = damage+bonusDamage
 	if critRoll <= crit:
 		_target.damage(newDamage*2, toCrit)
 		dmg.setup(newDamage*2, Vector3.RIGHT, Color.RED, toCrit, _target)
@@ -50,17 +51,18 @@ func apply(_user, _item, _target):
 			_user.heal(newDamage)
 			_user.get_tree().current_scene.add_child(lst)
 			lst.setup(newDamage, Vector3.LEFT, Color.GREEN, toCrit, _user.userPos)
+
 func updateValue (_item):
-	match upgrade_type: #corrigir problema de match com enum
+	match upgrade_type: 
 		0:
 			if _item.tier > 0:
-				newDamage = damage+tier_upgade*_item.tier
+				newDamage = (damage+tier_upgade*_item.tier)+bonusDamage
 				print("nb: ",newDamage)
 			else:
-				newDamage = damage
+				newDamage = damage+bonusDamage
 				print("nb: ",newDamage)
 		1:
 			if _item.tier > 0:
-				newDamage = damage*(_item.tier+1)
+				newDamage = (damage*(_item.tier+1))+bonusDamage
 			else:
-				newDamage = damage
+				newDamage = damage+bonusDamage

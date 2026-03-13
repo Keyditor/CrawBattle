@@ -1,10 +1,10 @@
 extends ItemEffects
-class_name BurnEffects
+class_name HealEffects
 enum upgradeType {Add,Multi}
 
-@export var burn:int
-var newBurn : int = burn
-var bonusBurn : int
+@export var heal:int
+var newHeal : int = heal
+var bonusHeal : int
 @export var tier_upgade:int
 @export var upgrade_type:upgradeType
 @export_range(1,100,1) var crit:int
@@ -13,7 +13,6 @@ var bonusBurn : int
 var rng =  RandomNumberGenerator.new()
 
 func apply(_user, _item, _target):
-	#newBurn = burn
 	var dmg = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	#var lst = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	_target.get_tree().current_scene.add_child(dmg)
@@ -24,36 +23,35 @@ func apply(_user, _item, _target):
 	if critRoll <= crit:
 		toCrit = true
 	else: toCrit = false
-	match upgrade_type: 
+	match upgrade_type: #corrigir problema de match com enum
 		0:
 			if _item.tier > 0:
-				newBurn = (burn+tier_upgade*_item.tier)+bonusBurn
-				print("nb: ",newBurn)
+				newHeal = (heal+tier_upgade*_item.tier)+bonusHeal
 			else:
-				newBurn = burn+bonusBurn
-				print("nb: ",newBurn)
+				newHeal = heal+bonusHeal
 		1:
 			if _item.tier > 0:
-				newBurn = (burn*(_item.tier+1))+bonusBurn
+				newHeal = (heal*(_item.tier+1))+bonusHeal
 			else:
-				newBurn = burn+bonusBurn
+				newHeal = heal+bonusHeal
 	if critRoll <= crit:
-		_target.addBurn(newBurn*2, toCrit)
-		dmg.setup((newBurn)*2, Vector3.LEFT, Color.DARK_ORANGE, toCrit, _target)
+		_user.heal((heal*(_item.tier+1))*2, toCrit)
+		dmg.setup((heal*(_item.tier+1))*2, Vector3.LEFT, Color.GREEN, toCrit, _user)
 	else:
-		_target.addBurn(newBurn)
-		dmg.setup(newBurn, Vector3.LEFT, Color.DARK_ORANGE, toCrit, _target)
+		_user.heal(heal*(_item.tier+1))
+		dmg.setup(heal*(_item.tier+1), Vector3.LEFT, Color.GREEN, toCrit, _user)
+
 func updateValue (_item):
-	match upgrade_type: 
+	match upgrade_type: #corrigir problema de match com enum
 		0:
 			if _item.tier > 0:
-				newBurn = (burn+tier_upgade*_item.tier)+bonusBurn
-				print("nb: ",newBurn)
+				newHeal = heal+tier_upgade*_item.tier
+				print("nb: ",newHeal)
 			else:
-				newBurn = burn+bonusBurn
-				print("nb: ",newBurn)
+				newHeal = heal
+				print("nb: ",newHeal)
 		1:
 			if _item.tier > 0:
-				newBurn = (burn*(_item.tier+1))+bonusBurn
+				newHeal = heal*(_item.tier+1)
 			else:
-				newBurn = burn+bonusBurn
+				newHeal = heal
