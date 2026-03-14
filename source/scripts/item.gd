@@ -14,12 +14,15 @@ enum _Types {Melee, Ranged, Armor, Ring, Charm, Cape, Pet}
 @export var types : Array[_Types]
 @export var effects : Array[ItemEffects]
 @export_range(0,4,1) var tier : int = 0
+var cooldown_time := base_cooldown
 
+@onready var mat = $Shape/Image2.material_override
 @onready var damageUI = $SubViewport/VBoxContainer/HBoxContainer/Damage
 @onready var shieldUI = $SubViewport/VBoxContainer/HBoxContainer/Shield
 @onready var burnUI = $SubViewport/VBoxContainer/HBoxContainer/Burn
 @onready var poisonUI = $SubViewport/VBoxContainer/HBoxContainer/Poison
 @onready var healUI = $SubViewport/VBoxContainer/HBoxContainer2/Heal
+@onready var cooldownUI = $Shape/Image2
 @onready var mesh_instance: MeshInstance3D = $Shape
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var sprite: Sprite3D = $Shape/Image
@@ -58,14 +61,15 @@ func _process(delta):
 			#Color.DARK_ORANGE
 		#)
 		#await get_tree().create_timer(0.55).timeout
-		for node in get_tree().get_nodes_in_group("hero"):
-			hero = node
-		for node in get_tree().get_nodes_in_group("enemie"):
-			target = node
-		for e in effects:
-			e.apply(hero, self, target)
-			await get_tree().create_timer(0.1).timeout
-	
+		#for node in get_tree().get_nodes_in_group("hero"):
+			#hero = node
+		#for node in get_tree().get_nodes_in_group("enemie"):
+			#target = node
+		#for e in effects:
+			#e.apply(hero, self, target)
+			#await get_tree().create_timer(0.1).timeout
+		cooldownUI.visible = true
+		start_cooldown()
 	
 	for e in effects:
 		e.updateValue(self)
@@ -93,6 +97,27 @@ func _process(delta):
 		move_to_mouse()
 	# Suaviza subida e descida
 		global_position.y = lerp(global_position.y, target_y, return_speed * delta)
+	
+
+func start_cooldown():
+	cooldown_time = base_cooldown
+	var t := 0.0
+	
+	while t < cooldown_time:
+		await get_tree().process_frame
+		t += get_process_delta_time()
+		
+		var p = t / cooldown_time
+		mat.set_shader_parameter("progress", p)
+	for node in get_tree().get_nodes_in_group("hero"):
+		hero = node
+	for node in get_tree().get_nodes_in_group("enemie"):
+		target = node
+	start_cooldown()
+	for e in effects:
+		e.apply(hero, self, target)
+		await get_tree().create_timer(0.1).timeout
+
 
 func start_drag():
 	dragging = true
@@ -265,6 +290,7 @@ func existe_item_igual():
 
 func imager():
 	sprite.texture = itemImage
+	cooldownUI.texture = itemImage
 
 func _eomesmo(item):
 	print("eomesmo start")
@@ -313,6 +339,7 @@ func _ready() -> void:
 	burnUI.visible = false
 	poisonUI.visible = false
 	healUI.visible = false
+	cooldownUI.visible = false
 	for no in get_tree().get_nodes_in_group("enemie"):
 		target = no
 	for e in effects:
