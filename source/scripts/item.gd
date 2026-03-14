@@ -15,10 +15,11 @@ enum _Types {Melee, Ranged, Armor, Ring, Charm, Cape, Pet}
 @export var effects : Array[ItemEffects]
 @export_range(0,4,1) var tier : int = 0
 
-@onready var damageUI = $SubViewport/HBoxContainer/Damage
-@onready var shieldUI = $SubViewport/HBoxContainer/Shield
-@onready var burnUI = $SubViewport/HBoxContainer/Burn
-@onready var poisonUI = $SubViewport/HBoxContainer/Poison
+@onready var damageUI = $SubViewport/VBoxContainer/HBoxContainer/Damage
+@onready var shieldUI = $SubViewport/VBoxContainer/HBoxContainer/Shield
+@onready var burnUI = $SubViewport/VBoxContainer/HBoxContainer/Burn
+@onready var poisonUI = $SubViewport/VBoxContainer/HBoxContainer/Poison
+@onready var healUI = $SubViewport/VBoxContainer/HBoxContainer2/Heal
 @onready var mesh_instance: MeshInstance3D = $Shape
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var sprite: Sprite3D = $Shape/Image
@@ -51,18 +52,19 @@ func _input(event):
 
 func _process(delta):
 	if Input.is_action_just_pressed("C"):
-		await spawn_particle(
-			self.global_position,
-			Vector3(8.5,0,-5.6),
-			Color.DARK_ORANGE
-		)
-		await get_tree().create_timer(0.55).timeout
+		#await spawn_particle(
+			#self.global_position,
+			#Vector3(8.5,0,-5.6),
+			#Color.DARK_ORANGE
+		#)
+		#await get_tree().create_timer(0.55).timeout
 		for node in get_tree().get_nodes_in_group("hero"):
 			hero = node
 		for node in get_tree().get_nodes_in_group("enemie"):
 			target = node
 		for e in effects:
 			e.apply(hero, self, target)
+			await get_tree().create_timer(0.1).timeout
 	
 	
 	for e in effects:
@@ -76,7 +78,7 @@ func _process(delta):
 		if e is PoisonEffects:
 			poisonUI.text = str("[color=purple]",e.newPoison,"[/color]")
 		if e is HealEffects:
-			poisonUI.text = str("[color=green]",e.newPoison,"[/color]")
+			healUI.text = str("[color=green]",e.newHeal,"[/color]")
 	
 	if Game.checkUpgrade and tier != 4:
 		print(self.name,": dando upgrade consecutivo")
@@ -310,20 +312,25 @@ func _ready() -> void:
 	shieldUI.visible = false
 	burnUI.visible = false
 	poisonUI.visible = false
+	healUI.visible = false
 	for no in get_tree().get_nodes_in_group("enemie"):
 		target = no
 	for e in effects:
 		if e is WeaponEffects:
 			damageUI.text = str("[color=red]",e.newDamage,"[/color]")
 			damageUI.visible = true
-		#if e.shield:
-		#	shieldUI.text = str("[color=blue]",e.shield,"[/color]")
+		if e is ShieldEffects:
+			shieldUI.text = str("[color=blue]",e.newShield,"[/color]")
+			shieldUI.visible = true
 		if e is BurnEffects:
 			burnUI.text = str("[color=orange]",e.newBurn,"[/color]")
 			burnUI.visible = true
 		if e is PoisonEffects:
 			poisonUI.text = str("[color=purple]",e.newPoison,"[/color]")
 			poisonUI.visible = true
+		if e is HealEffects:
+			healUI.text = str("[color=green]",e.newHeal,"[/color]")
+			healUI.visible = true
 	print(self.name)
 	Game.itemUpgrade.connect(_eomesmo)
 	label.text = ""

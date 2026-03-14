@@ -9,10 +9,18 @@ var bonusBurn : int
 @export var upgrade_type:upgradeType
 @export_range(1,100,1) var crit:int
 #@export var life_steal: bool
+var color:Color = Color.DARK_ORANGE
 
 var rng =  RandomNumberGenerator.new()
 
 func apply(_user, _item, _target):
+	var vec = Vector3(randf_range(0,0.8), 0, randf_range(0,-0.8))
+	await _item.spawn_particle(
+			_item.global_position,
+			_target.global_position+vec,
+			color
+		)
+	await _item.get_tree().create_timer(0.55).timeout
 	#newBurn = burn
 	var dmg = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	#var lst = preload("res://scenes/DamageIndicator.tscn").instantiate()
@@ -28,10 +36,10 @@ func apply(_user, _item, _target):
 		0:
 			if _item.tier > 0:
 				newBurn = (burn+tier_upgade*_item.tier)+bonusBurn
-				print("nb: ",newBurn)
+				#print("nb: ",newBurn)
 			else:
 				newBurn = burn+bonusBurn
-				print("nb: ",newBurn)
+				#print("nb: ",newBurn)
 		1:
 			if _item.tier > 0:
 				newBurn = (burn*(_item.tier+1))+bonusBurn
@@ -39,19 +47,19 @@ func apply(_user, _item, _target):
 				newBurn = burn+bonusBurn
 	if critRoll <= crit:
 		_target.addBurn(newBurn*2, toCrit)
-		dmg.setup((newBurn)*2, Vector3.LEFT, Color.DARK_ORANGE, toCrit, _target)
+		dmg.setup((newBurn)*2, Vector3.LEFT, color, toCrit, _target)
 	else:
 		_target.addBurn(newBurn)
-		dmg.setup(newBurn, Vector3.LEFT, Color.DARK_ORANGE, toCrit, _target)
+		dmg.setup(newBurn, Vector3.LEFT, color, toCrit, _target)
 func updateValue (_item):
 	match upgrade_type: 
 		0:
 			if _item.tier > 0:
 				newBurn = (burn+tier_upgade*_item.tier)+bonusBurn
-				print("nb: ",newBurn)
+				#print("nb: ",newBurn)
 			else:
 				newBurn = burn+bonusBurn
-				print("nb: ",newBurn)
+				#print("nb: ",newBurn)
 		1:
 			if _item.tier > 0:
 				newBurn = (burn*(_item.tier+1))+bonusBurn

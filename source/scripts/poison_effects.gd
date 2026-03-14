@@ -9,10 +9,18 @@ var bonusPoison : int
 @export var upgrade_type:upgradeType
 @export_range(1,100,1) var crit:int
 #@export var life_steal: bool
+var color:Color = Color.REBECCA_PURPLE
 
 var rng =  RandomNumberGenerator.new()
 
 func apply(_user, _item, _target):
+	var vec = Vector3(randf_range(0,0.8), 0, randf_range(0,-0.8))
+	await _item.spawn_particle(
+			_item.global_position,
+			_target.global_position+vec,
+			color
+		)
+	await _item.get_tree().create_timer(0.55).timeout
 	var dmg = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	#var lst = preload("res://scenes/DamageIndicator.tscn").instantiate()
 	_target.get_tree().current_scene.add_child(dmg)
@@ -36,19 +44,19 @@ func apply(_user, _item, _target):
 				newPoison = poison+bonusPoison
 	if critRoll <= crit:
 		_target.addPoison((poison*(_item.tier+1))*2, toCrit)
-		dmg.setup((poison*(_item.tier+1))*2, Vector3.LEFT, Color.REBECCA_PURPLE, toCrit, _target)
+		dmg.setup((poison*(_item.tier+1))*2, Vector3.LEFT, color, toCrit, _target)
 	else:
 		_target.addPoison(poison*(_item.tier+1))
-		dmg.setup(poison*(_item.tier+1), Vector3.LEFT, Color.REBECCA_PURPLE, toCrit, _target)
+		dmg.setup(poison*(_item.tier+1), Vector3.LEFT, color, toCrit, _target)
 func updateValue (_item):
 	match upgrade_type: #corrigir problema de match com enum
 		0:
 			if _item.tier > 0:
 				newPoison = poison+tier_upgade*_item.tier
-				print("nb: ",newPoison)
+				#print("nb: ",newPoison)
 			else:
 				newPoison = poison
-				print("nb: ",newPoison)
+				#print("nb: ",newPoison)
 		1:
 			if _item.tier > 0:
 				newPoison = poison*(_item.tier+1)
