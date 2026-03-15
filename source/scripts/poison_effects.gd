@@ -14,10 +14,15 @@ var color:Color = Color.REBECCA_PURPLE
 var rng =  RandomNumberGenerator.new()
 
 func apply(_user, _item, _target):
-	var vec = Vector3(randf_range(0,0.8), 0, randf_range(0,-0.8))
+	var targetPos = _target.userPos
+	var vec:Vector3
+	if _user.type == "hero":
+		vec = Vector3(randf_range(0,0.8), 0, randf_range(0,-0.8))
+	else:
+		vec = Vector3(randf_range(0,-0.8), 0, randf_range(0,0.8))
 	await _item.spawn_particle(
 			_item.global_position,
-			_target.global_position+vec,
+			targetPos.global_position+vec,
 			color
 		)
 	await _item.get_tree().create_timer(0.55).timeout
@@ -44,10 +49,10 @@ func apply(_user, _item, _target):
 				newPoison = poison+bonusPoison
 	if critRoll <= crit:
 		_target.addPoison((poison*(_item.tier+1))*2, toCrit)
-		dmg.setup((poison*(_item.tier+1))*2, Vector3.LEFT, color, toCrit, _target)
+		dmg.setup((poison*(_item.tier+1))*2, Vector3.LEFT, color, toCrit, targetPos)
 	else:
 		_target.addPoison(poison*(_item.tier+1))
-		dmg.setup(poison*(_item.tier+1), Vector3.LEFT, color, toCrit, _target)
+		dmg.setup(poison*(_item.tier+1), Vector3.LEFT, color, toCrit, targetPos)
 func updateValue (_item):
 	match upgrade_type: #corrigir problema de match com enum
 		0:

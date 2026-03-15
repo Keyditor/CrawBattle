@@ -6,6 +6,7 @@ var ocupado_por = null
 
 func _ready():
 	add_to_group("slots")
+	print("slot ",ID," em ",inventory.name)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 

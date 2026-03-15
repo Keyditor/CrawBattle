@@ -39,12 +39,14 @@ var drag_plane : Plane
 var dragging := false
 var is_floating := false
 var target_y := base_y
+var enemieItem = false
+var enemieSlotChoice = 0
 var hero
 var target
 var onBattle = false
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and !enemieItem:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				if is_mouse_over():
@@ -92,7 +94,7 @@ func _process(delta):
 		var uItem = existe_item_igual()
 		if uItem!=self: Game.itemUpgrade.emit(uItem, self); Game.checkUpgrade = false
 		print("desligando upgrade")
-	if !slots_reservados and !adding:
+	if !slots_reservados and !adding and !enemieItem:
 		label.text = "Posicione o item em um slot vazio!"
 	else:
 		label.text = ""
@@ -132,6 +134,27 @@ func start_cooldown():
 		start_cooldown()
 		for e in effects:
 			e.apply(hero, self, target)
+			await get_tree().create_timer(0.1).timeout
+	if slots_reservados[0].inventory.name == "enemieGorund":
+		cooldown_time = base_cooldown
+		var t := 0.0
+		
+		while t < cooldown_time:
+			if onBattle:
+				await get_tree().process_frame
+				t += get_process_delta_time()
+				
+				var p = t / cooldown_time
+				mat2.set_shader_parameter("progress", p)
+			else:
+				return
+		for node in get_tree().get_nodes_in_group("hero"):
+			hero = node
+		for node in get_tree().get_nodes_in_group("enemie"):
+			target = node
+		start_cooldown()
+		for e in effects:
+			e.apply(target, self, hero)
 			await get_tree().create_timer(0.1).timeout
 
 
@@ -339,6 +362,32 @@ func upgrade(item,caller):
 				#set_process(true)
 	else: return
 
+func enemieSlot(esc):
+	var slotsT : Array
+	for s in get_tree().get_nodes_in_group("slots"):
+		slotsT.append(s)
+	match slots_necessarios:
+			1:
+				for c in slotsT:
+					print("ID ",c.ID,"OC ",c.ocupado_por)
+					if c.ocupado_por == null and c.inventory.name == "enemieGorund" and c.ID == enemieSlotChoice:
+						global_position = c.global_position
+						return
+			2:
+				for c in len(slotsT):
+					if slotsT[c].ocupado_por == null and slotsT[c].inventory.name == "enemieGorund" and slotsT[c].ID == enemieSlotChoice:
+						if slotsT[c-1].ocupado_por == null:
+							global_position = slotsT[c].global_position
+							return
+			3:
+				for c in len(slotsT):
+					if slotsT[c].ocupado_por == null and slotsT[c].inventory.name == "enemieGorund" and slotsT[c].ID == enemieSlotChoice:
+						if slotsT[c-1].ocupado_por == null and slotsT[c+1].ocupado_por == null:
+							global_position = slotsT[c].global_position
+							return
+
+	pass
+
 func searchSlot():
 	var slotsT : Array
 	for s in get_tree().get_nodes_in_group("slots"):
@@ -422,9 +471,14 @@ func _ready() -> void:
 	if spawn == "world":
 		pass
 	else:
-		searchSlot()
-		await get_tree().create_timer(0.1).timeout
-		atualizar_snap()
+		if enemieItem:
+			enemieSlot(enemieSlotChoice)
+			await get_tree().create_timer(0.1).timeout
+			atualizar_snap()
+		else:
+			searchSlot()
+			await get_tree().create_timer(0.1).timeout
+			atualizar_snap()
 	#if has_node("../onStash"):
 		#$"../onStash".add_item(self)
 	if has_node("../Camera3D"):

@@ -336,12 +336,106 @@ environment = SubResource("Environment_mv13s")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=691848701]
 libraries/ = SubResource("AnimationLibrary_mo806")
 
+[node name="enemieGorund" type="Node3D" parent="." unique_id=174492381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, -4.885931)
+script = ExtResource("5_d6xj2")
+
+[node name="slot1" type="Area3D" parent="enemieGorund" unique_id=1472079344 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8174124, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 1
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot1" unique_id=259565227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot2" type="Area3D" parent="enemieGorund" unique_id=627314529 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0975447, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 2
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot2" unique_id=1414804191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot3" type="Area3D" parent="enemieGorund" unique_id=1398024418 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4012785, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 3
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot3" unique_id=1256201278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot4" type="Area3D" parent="enemieGorund" unique_id=38367044 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7015785, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 4
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot4" unique_id=1118761396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot5" type="Area3D" parent="enemieGorund" unique_id=834874107 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023754835, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 5
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot5" unique_id=54592796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot6" type="Area3D" parent="enemieGorund" unique_id=242399671 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6956924, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 6
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot6" unique_id=134286757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot7" type="Area3D" parent="enemieGorund" unique_id=667873396 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3974466, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 7
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot7" unique_id=1310680056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot8" type="Area3D" parent="enemieGorund" unique_id=943524669 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.097223, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 8
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot8" unique_id=286786573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
+[node name="slot9" type="Area3D" parent="enemieGorund" unique_id=1792899948 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7908945, 0, 2.435626)
+script = ExtResource("5_n40cg")
+ID = 9
+inventory = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemieGorund/slot9" unique_id=1933433518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.13897705)
+shape = SubResource("BoxShape3D_mo806")
+
 [node name="onGorund" type="Node3D" parent="." unique_id=1331164376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 0)
 script = ExtResource("5_d6xj2")
 
 [node name="slot1" type="Area3D" parent="onGorund" unique_id=838990134 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8413177, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8174124, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 1
 inventory = NodePath("..")
@@ -351,7 +445,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot2" type="Area3D" parent="onGorund" unique_id=408203188 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.142475, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0975447, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 2
 inventory = NodePath("..")
@@ -371,7 +465,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot4" type="Area3D" parent="onGorund" unique_id=561334397 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7224718, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7015785, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 4
 inventory = NodePath("..")
@@ -381,7 +475,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot5" type="Area3D" parent="onGorund" unique_id=49983954 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0072945356, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023754835, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 5
 inventory = NodePath("..")
@@ -391,7 +485,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot6" type="Area3D" parent="onGorund" unique_id=1981238439 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6688808, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6956924, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 6
 inventory = NodePath("..")
@@ -401,7 +495,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot7" type="Area3D" parent="onGorund" unique_id=24456414 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46106, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3974466, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 7
 inventory = NodePath("..")
@@ -411,7 +505,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot8" type="Area3D" parent="onGorund" unique_id=2131627726 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1153226, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.097223, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 8
 inventory = NodePath("..")
@@ -421,7 +515,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="slot9" type="Area3D" parent="onGorund" unique_id=461459167 node_paths=PackedStringArray("inventory")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.836703, 0, 2.435626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7908945, 0, 2.435626)
 script = ExtResource("5_n40cg")
 ID = 9
 inventory = NodePath("..")

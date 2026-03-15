@@ -14,7 +14,12 @@ var color:Color = Color.BLUE
 var rng =  RandomNumberGenerator.new()
 
 func apply(_user, _item, _target):
-	var vec = Vector3(randf_range(0,-0.8), 0, randf_range(0,0.8))
+	var targetPos = _target.userPos
+	var vec:Vector3
+	if _user.type == "hero":
+		vec = Vector3(randf_range(0,-0.8), 0, randf_range(0,0.8))
+	else:
+		vec = Vector3(randf_range(0,0.8), 0, randf_range(0,-0.8))
 	await _item.spawn_particle(
 			_item.global_position,
 			_user.userPos.global_position+vec,

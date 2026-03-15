@@ -3,11 +3,13 @@ extends Node3D
 var shield : int = 250
 var burn : int = 0
 var poison : int = 0
+var type = "enemy"
 
 @onready var uiVida = $SubViewport/HBoxContainer/Vida
 @onready var uiShield = $SubViewport/HBoxContainer/Shield
 @onready var uiBurn = $SubViewport/HBoxContainer/Burn
 @onready var uiPoison = $SubViewport/HBoxContainer/Poison
+@onready var userPos = self
 
 
 # Called when the node enters the scene tree for the first time.

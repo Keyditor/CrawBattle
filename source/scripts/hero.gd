@@ -4,6 +4,7 @@ var maxHealth : int
 var shield : int
 var burn : int
 var poison : int
+var type = "hero"
 @export var wins : int
 @export var loses : int
 @onready var cam = $Camera3D
@@ -42,18 +43,31 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_half_tick():
-	if burn < 0:
-		health -= burn
-		burn -= 1
+	#print("Tentando queimar")
+	if burn > 0:
+		if shield > 0:
+			shield -= burn
+			burn -= 1
+			#print("BURN!")
+		else:
+			health -= burn
+			burn -= 1
+			#print("BURN!")
 
 func _on_tick():
-	if poison < 0:
+	if poison > 0:
 		health -= poison
 
 func damage(n,c=false):
 	if c:
+		if shield > 0:
+			shield -= n
+			return
 		health -= n
 	else:
+		if shield > 0:
+			shield -= n
+			return
 		health -= n
 
 func heal(n,c=false):
@@ -86,6 +100,7 @@ func _process(delta: float) -> void:
 		health = maxHealth
 	healthBar.max_value = maxHealth
 	healthBar.value = health
+	shieldBar.value = shield
 	shieldBar.max_value = maxHealth
 	uiVida.text = str(health)
 	uiShield.text = str(shield)
@@ -125,8 +140,10 @@ func _process(delta: float) -> void:
 		instancia2.slots_necessarios = 1
 		instancia2.itemName = "teste2"
 		instancia2.itemImage = preload("res://voxels/smallPlaceholder.jpg")
+		instancia2.enemieItem=true
+		instancia2.enemieSlotChoice = 5
 		instancia2.tier = 0
-		instancia2.base_cooldown = 7
+		instancia2.base_cooldown = 3
 		instancia2.spawn = "board"
 		add_child(instancia2)
 	pass
