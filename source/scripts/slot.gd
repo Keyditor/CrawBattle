@@ -24,6 +24,7 @@ func esta_livre() -> bool:
 
 func reservar(item):
 	ocupado_por = item
+	print("RESERVADO ",ID)
 
 func liberar():
 	ocupado_por = null

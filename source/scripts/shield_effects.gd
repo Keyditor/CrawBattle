@@ -43,11 +43,11 @@ func apply(_user, _item, _target):
 			else:
 				newShield = shield+bonusShield
 	if critRoll <= crit:
-		_user.addShield((shield*(_item.tier+1))*2, toCrit)
-		dmg.setup((shield*(_item.tier+1))*2, Vector3.LEFT, color, toCrit, _user.userPos)
+		_user.addShield(newShield*2, toCrit)
+		dmg.setup(newShield*2, Vector3.LEFT, color, toCrit, _user.userPos)
 	else:
-		_user.addShield(shield*(_item.tier+1))
-		dmg.setup(shield*(_item.tier+1), Vector3.LEFT, color, toCrit, _user.userPos)
+		_user.addShield(newShield)
+		dmg.setup(newShield, Vector3.LEFT, color, toCrit, _user.userPos)
 
 func updateValue (_item):
 	match upgrade_type: #corrigir problema de match com enum

@@ -25,6 +25,7 @@ var ground = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Game.stopBattle.connect()  # Preparado para meconicade win e lose
 	GlobalTick.half_tick.connect(_on_half_tick)
 	GlobalTick.tick.connect(_on_tick)
 	maxHealth = 1000
@@ -96,9 +97,11 @@ func _process(delta: float) -> void:
 	else: uiBurn.visible = true
 	if poison <= 0: uiPoison.visible = false
 	else: uiPoison.visible = true
-	
-	if battle:
-		pass
+	if shield <= 0:
+			shield = 0
+	if health <= 0:
+			health = 0
+			Game.stopBattle.emit("player")
 	if Input.is_action_just_pressed("ui_accept") and not anim.is_playing():
 		print("press: ui_accept")
 		if camPos == "ground":
@@ -112,8 +115,18 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		var test = preload("res://scenes/itens/item_test_1.tscn")
 		var instancia = test.instantiate()
-		instancia.slots_necessarios = 1
-		instancia.itemImage = preload("res://voxels/smallPlaceholder.jpg")
+		var instancia2 = test.instantiate()
+		instancia.slots_necessarios = 2
+		instancia.itemImage = preload("res://voxels/mediumPlaceholder.jpeg")
 		instancia.tier = 0
+		instancia.spawn = "board"
 		add_child(instancia)
+		await get_tree().create_timer(0.2).timeout
+		instancia2.slots_necessarios = 1
+		instancia2.itemName = "teste2"
+		instancia2.itemImage = preload("res://voxels/smallPlaceholder.jpg")
+		instancia2.tier = 0
+		instancia2.base_cooldown = 7
+		instancia2.spawn = "board"
+		add_child(instancia2)
 	pass

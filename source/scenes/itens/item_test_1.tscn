@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c73yubsow46qs"]
 
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xfg7t"]
-[ext_resource type="Texture2D" uid="uid://b1nm2g31sd05c" path="res://voxels/smallPlaceholder.jpg" id="2_mabah"]
+[ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="2_7tdnu"]
 [ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_ckac4"]
 [ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="3_dxdcr"]
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
@@ -76,7 +76,8 @@ viewport_path = NodePath("SubViewport")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_xfg7t")
 itemName = "TESTE"
-itemImage = ExtResource("2_mabah")
+itemImage = ExtResource("2_7tdnu")
+slots_necessarios = 2
 base_cooldown = 5
 types = Array[int]([0])
 effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_m0ncu"), SubResource("Resource_akw1l"), SubResource("Resource_7tdnu"), SubResource("Resource_btvkp"), SubResource("Resource_1iat7")])

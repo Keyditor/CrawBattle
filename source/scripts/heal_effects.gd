@@ -43,11 +43,11 @@ func apply(_user, _item, _target):
 			else:
 				newHeal = heal+bonusHeal
 	if critRoll <= crit:
-		_user.heal((heal*(_item.tier+1))*2, toCrit)
-		dmg.setup((heal*(_item.tier+1))*2, Vector3.LEFT, color, toCrit, _user.userPos)
+		_user.heal(newHeal*2, toCrit)
+		dmg.setup(newHeal*2, Vector3.LEFT, color, toCrit, _user.userPos)
 	else:
-		_user.heal(heal*(_item.tier+1))
-		dmg.setup(heal*(_item.tier+1), Vector3.LEFT, color, toCrit, _user.userPos)
+		_user.heal(newHeal)
+		dmg.setup(newHeal, Vector3.LEFT, color, toCrit, _user.userPos)
 
 func updateValue (_item):
 	match upgrade_type: #corrigir problema de match com enum

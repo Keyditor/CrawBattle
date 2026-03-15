@@ -12,6 +12,7 @@ var poison : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Game.stopBattle.connect()  # Preparado para meconicade win e lose
 	GlobalTick.half_tick.connect(_on_half_tick)
 	GlobalTick.tick.connect(_on_tick)
 	await get_tree().process_frame
@@ -77,7 +78,6 @@ func addPoison(n,c=false):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	Game.EnemieHp = health
 	Game.EnemieBurn = burn
 	Game.EnemieShield = shield
@@ -100,5 +100,6 @@ func _process(delta: float) -> void:
 			shield = 0
 	if health <= 0:
 			health = 0
+			Game.stopBattle.emit("enemie")
 	
 	pass

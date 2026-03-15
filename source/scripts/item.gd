@@ -15,8 +15,9 @@ enum _Types {Melee, Ranged, Armor, Ring, Charm, Cape, Pet}
 @export var effects : Array[ItemEffects]
 @export_range(0,4,1) var tier : int = 0
 var cooldown_time := base_cooldown
+var spawn = ""
 
-@onready var mat = $Shape/Image2.material_override
+@onready var mat2 = $Shape/Image2.material_override
 @onready var damageUI = $SubViewport/VBoxContainer/HBoxContainer/Damage
 @onready var shieldUI = $SubViewport/VBoxContainer/HBoxContainer/Shield
 @onready var burnUI = $SubViewport/VBoxContainer/HBoxContainer/Burn
@@ -40,6 +41,7 @@ var is_floating := false
 var target_y := base_y
 var hero
 var target
+var onBattle = false
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -69,7 +71,8 @@ func _process(delta):
 			#e.apply(hero, self, target)
 			#await get_tree().create_timer(0.1).timeout
 		cooldownUI.visible = true
-		start_cooldown()
+		onBattle = true
+		Game.startBattle.emit()
 	
 	for e in effects:
 		e.updateValue(self)
@@ -99,24 +102,37 @@ func _process(delta):
 		global_position.y = lerp(global_position.y, target_y, return_speed * delta)
 	
 
-func start_cooldown():
-	cooldown_time = base_cooldown
+func stop_cooldown(who):
+	print(who)
+	onBattle = false
 	var t := 0.0
-	
-	while t < cooldown_time:
-		await get_tree().process_frame
-		t += get_process_delta_time()
+	var p = t / cooldown_time
+	mat2.set_shader_parameter("progress", p)
+	cooldownUI.visible = false
+
+func start_cooldown():
+	print("teste chehsque: ",slots_reservados[0].inventory.name)
+	if slots_reservados[0].inventory.name == "onGorund":
+		cooldown_time = base_cooldown
+		var t := 0.0
 		
-		var p = t / cooldown_time
-		mat.set_shader_parameter("progress", p)
-	for node in get_tree().get_nodes_in_group("hero"):
-		hero = node
-	for node in get_tree().get_nodes_in_group("enemie"):
-		target = node
-	start_cooldown()
-	for e in effects:
-		e.apply(hero, self, target)
-		await get_tree().create_timer(0.1).timeout
+		while t < cooldown_time:
+			if onBattle:
+				await get_tree().process_frame
+				t += get_process_delta_time()
+				
+				var p = t / cooldown_time
+				mat2.set_shader_parameter("progress", p)
+			else:
+				return
+		for node in get_tree().get_nodes_in_group("hero"):
+			hero = node
+		for node in get_tree().get_nodes_in_group("enemie"):
+			target = node
+		start_cooldown()
+		for e in effects:
+			e.apply(hero, self, target)
+			await get_tree().create_timer(0.1).timeout
 
 
 func start_drag():
@@ -132,12 +148,6 @@ func stop_drag():
 	#print(global_position.y)
 	atualizar_snap()
 
-func followto(_side): #futura função para reorganização
-	pass
-
-func look_free_slot(): #futura função para reoorganização
-	pass
-
 func move_to_mouse():
 	var mouse_pos = get_viewport().get_mouse_position()
 	
@@ -151,6 +161,7 @@ func move_to_mouse():
 		global_position.z = hit.z
 
 func registrar_slot(slot):
+	print("teste 123")
 	if slot not in slots_encostando:
 		slots_encostando.append(slot)
 		#atualizar_snap()
@@ -160,8 +171,9 @@ func remover_slot(slot):
 	#atualizar_snap()
 
 func atualizar_snap():
+	print("COISO ",str(slots_encostando.size()))
 	if slots_encostando.size() < slots_necessarios:
-			voltar_para_ultima_posicao()	
+			voltar_para_ultima_posicao()
 			return
 	
 	# Ordena pelo ID
@@ -327,6 +339,41 @@ func upgrade(item,caller):
 				#set_process(true)
 	else: return
 
+func searchSlot():
+	var slotsT : Array
+	for s in get_tree().get_nodes_in_group("slots"):
+		slotsT.append(s)
+	match slots_necessarios:
+			1:
+				for c in slotsT:
+					print("ID ",c.ID,"OC ",c.ocupado_por)
+					if c.ocupado_por == null and c.inventory.name == "onGorund":
+						global_position = c.global_position
+						return
+					elif c.ocupado_por == null and c.inventory.name == "onStash":
+						global_position = c.global_position
+						return
+			2:
+				for c in len(slotsT):
+					if slotsT[c].ocupado_por == null and slotsT[c].inventory.name == "onGorund":
+						if slotsT[c-1].ocupado_por == null:
+							global_position = slotsT[c].global_position
+							return
+					elif slotsT[c].ocupado_por == null and slotsT[c].inventory.name == "onStash":
+						if slotsT[c-1].ocupado_por == null :
+							global_position = slotsT[c].global_position
+							return
+			3:
+				for c in len(slotsT):
+					if slotsT[c].ocupado_por == null and slotsT[c].inventory.name == "onGorund":
+						if slotsT[c-1].ocupado_por == null and slotsT[c+1].ocupado_por == null:
+							global_position = slotsT[c].global_position
+							return
+					elif slotsT[c].ocupado_por == null and slotsT[c].inventory.name == "onStash":
+						if slotsT[c-1].ocupado_por == null and slotsT[c+1].ocupado_por == null:
+							global_position = slotsT[c].global_position
+							return
+
 func spawn_particle(start: Vector3, target: Vector3, color: Color):
 	var particle = preload("res://scenes/effects/particle_arc.tscn").instantiate()
 	get_tree().current_scene.add_child(particle)
@@ -340,6 +387,10 @@ func _ready() -> void:
 	poisonUI.visible = false
 	healUI.visible = false
 	cooldownUI.visible = false
+	mat2 = mat2.duplicate()
+	cooldownUI.material_override = mat2
+	Game.startBattle.connect(start_cooldown)
+	Game.stopBattle.connect(stop_cooldown)
 	for no in get_tree().get_nodes_in_group("enemie"):
 		target = no
 	for e in effects:
@@ -368,6 +419,12 @@ func _ready() -> void:
 	ultima_posicao_valida = global_position
 	global_position.y = base_y
 	target_y = base_y
+	if spawn == "world":
+		pass
+	else:
+		searchSlot()
+		await get_tree().create_timer(0.1).timeout
+		atualizar_snap()
 	#if has_node("../onStash"):
 		#$"../onStash".add_item(self)
 	if has_node("../Camera3D"):

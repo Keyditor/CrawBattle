@@ -10,6 +10,8 @@ var EnemiePoison : int = 0
 var itemSemSlot = false
 var checkUpgrade = false
 var tickEnable = false
+signal startBattle()
+signal stopBattle(whoLoose)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
