@@ -525,7 +525,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032653809, 0.112701416, 0.
 shape = SubResource("BoxShape3D_mo806")
 
 [node name="onStash" type="Node3D" parent="." unique_id=1650304631]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 6.695134)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78796315, 7.9055557)
 script = ExtResource("5_d6xj2")
 
 [node name="slot1" type="Area3D" parent="onStash" unique_id=228968215 node_paths=PackedStringArray("inventory")]

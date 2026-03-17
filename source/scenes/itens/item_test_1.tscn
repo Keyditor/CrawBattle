@@ -5,28 +5,18 @@
 [ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_ckac4"]
 [ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="3_dxdcr"]
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
-[ext_resource type="Script" uid="uid://cvayaddaydb0y" path="res://scripts/heal_effects.gd" id="4_tswfj"]
 [ext_resource type="Script" uid="uid://5baed8ptmhxl" path="res://scripts/shield_effects.gd" id="5_10bed"]
-[ext_resource type="Script" uid="uid://c83clw7da256o" path="res://scripts/burn_effects.gd" id="5_ckac4"]
-[ext_resource type="Script" uid="uid://drpoi12seot5u" path="res://scripts/poison_effects.gd" id="5_tswfj"]
 [ext_resource type="Script" uid="uid://dl6vwtj6bs5uh" path="res://scripts/weapon_effects.gd" id="6_tswfj"]
 [ext_resource type="Script" uid="uid://d08xqu7g6e7dk" path="res://charge_effects.gd" id="9_m0ncu"]
 [ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_7tdnu"]
 
 [sub_resource type="Resource" id="Resource_m0ncu"]
 script = ExtResource("6_tswfj")
-damage = 10
+damage = 100
 tier_upgade = 5
 upgrade_type = 1
 crit = 30
 metadata/_custom_type_script = "uid://dl6vwtj6bs5uh"
-
-[sub_resource type="Resource" id="Resource_akw1l"]
-script = ExtResource("4_tswfj")
-heal = 100
-tier_upgade = 50
-crit = 30
-metadata/_custom_type_script = "uid://cvayaddaydb0y"
 
 [sub_resource type="Resource" id="Resource_7tdnu"]
 script = ExtResource("5_10bed")
@@ -34,20 +24,6 @@ shield = 50
 tier_upgade = 25
 crit = 30
 metadata/_custom_type_script = "uid://5baed8ptmhxl"
-
-[sub_resource type="Resource" id="Resource_btvkp"]
-script = ExtResource("5_ckac4")
-burn = 10
-tier_upgade = 5
-crit = 30
-metadata/_custom_type_script = "uid://c83clw7da256o"
-
-[sub_resource type="Resource" id="Resource_1iat7"]
-script = ExtResource("5_tswfj")
-poison = 6
-tier_upgade = 3
-crit = 30
-metadata/_custom_type_script = "uid://drpoi12seot5u"
 
 [sub_resource type="Resource" id="Resource_4scsy"]
 script = ExtResource("9_m0ncu")
@@ -80,6 +56,9 @@ points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xfg7t"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_m0ncu"]
+viewport_path = NodePath("SubViewport2")
+
 [node name="ItemTest1" type="StaticBody3D" unique_id=578422450]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_xfg7t")
@@ -88,7 +67,7 @@ itemImage = ExtResource("2_7tdnu")
 slots_necessarios = 2
 base_cooldown = 5
 types = Array[int]([0])
-effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_m0ncu"), SubResource("Resource_akw1l"), SubResource("Resource_7tdnu"), SubResource("Resource_btvkp"), SubResource("Resource_1iat7"), SubResource("Resource_4scsy")])
+effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_m0ncu"), SubResource("Resource_7tdnu"), SubResource("Resource_4scsy")])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
 transparent_bg = true
@@ -188,6 +167,39 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=1283849323]
+transparent_bg = true
+size = Vector2i(688, 514)
+render_target_update_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport2" unique_id=594879096]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_top = -148.0
+offset_right = 288.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Haste" type="RichTextLabel" parent="SubViewport2/VBoxContainer" unique_id=259271165]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 29
+theme_override_fonts/normal_font = SubResource("SystemFont_xfg7t")
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[color=green]9999[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
 [node name="Shape" type="MeshInstance3D" parent="." unique_id=946136437]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
 mesh = ExtResource("3_dxdcr")
@@ -216,5 +228,9 @@ font_size = 142
 outline_size = 79
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=358347564]
-transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.43333924, -1.0148818)
+transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.59135413, -1.0148818)
 texture = SubResource("ViewportTexture_xfg7t")
+
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1602769556]
+transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.59101486, 1.0656105)
+texture = SubResource("ViewportTexture_m0ncu")

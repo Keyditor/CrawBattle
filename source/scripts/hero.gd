@@ -64,11 +64,13 @@ func damage(n,c=false):
 			shield -= n
 			return
 		health -= n
+		Game.onDamage.emit("hero",n)
 	else:
 		if shield > 0:
 			shield -= n
 			return
 		health -= n
+		Game.onDamage.emit("hero",n)
 
 func heal(n,c=false):
 	if c:
@@ -134,7 +136,7 @@ func _process(delta: float) -> void:
 		var instancia2 = test2.instantiate()
 		instancia.slots_necessarios = 2
 		instancia.itemImage = preload("res://voxels/mediumPlaceholder.jpeg")
-		instancia.tier = 0
+		instancia.tier = 2
 		instancia.spawn = "board"
 		instancia.base_cooldown = 15
 		add_child(instancia)
@@ -142,9 +144,9 @@ func _process(delta: float) -> void:
 		instancia2.slots_necessarios = 1
 		instancia2.itemName = "teste2"
 		instancia2.itemImage = preload("res://voxels/smallPlaceholder.jpg")
-		instancia2.enemieItem=false
+		instancia2.enemieItem=true
 		instancia2.enemieSlotChoice = 5
-		instancia2.tier = 0
+		instancia2.tier = 4
 		instancia2.base_cooldown = 3
 		instancia2.spawn = "board"
 		add_child(instancia2)

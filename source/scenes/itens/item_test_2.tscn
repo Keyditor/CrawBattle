@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xdvns"]
 [ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="2_snbx5"]
 [ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_fbryo"]
-[ext_resource type="Script" uid="uid://cusg7p8x3nqtg" path="res://scripts/haste_effects.gd" id="4_qpl1h"]
+[ext_resource type="Script" uid="uid://culdgckxbhiwy" path="res://scripts/thorn_effects.gd" id="4_qpl1h"]
 [ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="9_yhoup"]
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="10_a1yii"]
 [ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_p2dtj"]
 
 [sub_resource type="Resource" id="Resource_f57tu"]
 script = ExtResource("4_qpl1h")
-haste = 2
-tier_upgade = 2
-type_haste = 1
-metadata/_custom_type_script = "uid://cusg7p8x3nqtg"
+percentage = 20.0
+tier_upgade = 5
+life_steal = true
+metadata/_custom_type_script = "uid://culdgckxbhiwy"
 
 [sub_resource type="SystemFont" id="SystemFont_xfg7t"]
 font_names = PackedStringArray("Roboto")
@@ -39,10 +39,20 @@ points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xfg7t"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="SystemFont" id="SystemFont_qpl1h"]
+font_names = PackedStringArray("Roboto")
+font_weight = 999
+font_stretch = 200
+subpixel_positioning = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f57tu"]
+viewport_path = NodePath("SubViewport2")
+
 [node name="ItemTest1" type="StaticBody3D" unique_id=578422450]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_xdvns")
 itemName = "chargeteste"
+activationType = 1
 itemImage = ExtResource("2_snbx5")
 slots_necessarios = 2
 base_cooldown = 5
@@ -175,5 +185,42 @@ font_size = 142
 outline_size = 79
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=358347564]
-transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.43333924, -1.0148818)
+transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.54043835, -1.0148818)
 texture = SubResource("ViewportTexture_xfg7t")
+
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=1447663242]
+transparent_bg = true
+size = Vector2i(688, 514)
+render_target_update_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport2" unique_id=79492280]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_top = -148.0
+offset_right = 288.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Haste" type="RichTextLabel" parent="SubViewport2/VBoxContainer" unique_id=346337996]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 29
+theme_override_fonts/normal_font = SubResource("SystemFont_qpl1h")
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[color=green]9999[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1582906677]
+transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.5400991, 1.0656105)
+texture = SubResource("ViewportTexture_f57tu")

@@ -1,9 +1,11 @@
 extends StaticBody3D
 class_name Item
 enum _Types {Melee, Ranged, Armor, Ring, Charm, Cape, Pet}
+enum _Activations {Active, Passive}
 
 @export var itemName : String
 @export_multiline("Descrição do item") var itemDescription : String
+@export var activationType : _Activations
 @export var itemImage : Texture2D
 @export var camera: Camera3D
 @export var float_height := 0.8
@@ -23,6 +25,7 @@ var spawn = ""
 @onready var burnUI = $SubViewport/VBoxContainer/HBoxContainer/Burn
 @onready var poisonUI = $SubViewport/VBoxContainer/HBoxContainer/Poison
 @onready var healUI = $SubViewport/VBoxContainer/HBoxContainer2/Heal
+@onready var hasteUI = $SubViewport2/VBoxContainer/Haste
 @onready var cooldownUI = $Shape/Image2
 @onready var mesh_instance: MeshInstance3D = $Shape
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -81,19 +84,28 @@ func _process(delta):
 		Game.startBattle.emit()
 	
 	for e in effects:
-		e.updateValue(self)
 		if e is WeaponEffects:
+			e.updateValue(self)
 			damageUI.text = str("[color=red]",e.newDamage,"[/color]")
 		if e is ShieldEffects:
+			e.updateValue(self)
 			shieldUI.text = str("[color=blue]",e.newShield,"[/color]")
 		if e is BurnEffects:
+			e.updateValue(self)
 			burnUI.text = str("[color=orange]",e.newBurn,"[/color]")
 		if e is PoisonEffects:
+			e.updateValue(self)
 			poisonUI.text = str("[color=purple]",e.newPoison,"[/color]")
 		if e is HealEffects:
+			e.updateValue(self)
 			healUI.text = str("[color=green]",e.newHeal,"[/color]")
 		else:
 			1 == 1
+	if haste > 0 :
+		hasteUI.text = str("%.1f" % haste)
+		hasteUI.visible = true
+	else:
+		hasteUI.visible = false
 	
 	if Game.checkUpgrade and tier != 4:
 		print(self.name,": dando upgrade consecutivo")
@@ -120,7 +132,7 @@ func stop_cooldown(who):
 
 func start_cooldown():
 	print("teste chehsque: ",slots_reservados[0].inventory.name)
-	if slots_reservados[0].inventory.name == "onGorund":
+	if slots_reservados[0].inventory.name == "onGorund" and activationType == 0:
 		cooldown_time = base_cooldown
 		t = 0.0
 		
@@ -147,7 +159,7 @@ func start_cooldown():
 		for e in effects:
 			e.apply(hero, self, target)
 			await get_tree().create_timer(0.1).timeout
-	if slots_reservados[0].inventory.name == "enemieGorund":
+	if slots_reservados[0].inventory.name == "enemieGorund" and activationType == 0:
 		cooldown_time = base_cooldown
 		t = 0.0
 		
@@ -169,6 +181,21 @@ func start_cooldown():
 			e.apply(target, self, hero)
 			await get_tree().create_timer(0.1).timeout
 
+func _onDamage(who,n):
+	for node in get_tree().get_nodes_in_group("hero"):
+		hero = node
+	for node in get_tree().get_nodes_in_group("enemie"):
+		target = node
+	if who == "enemie" and enemieItem:
+		for e in effects:
+			if e is ThornEffects:
+				e.updateValue(self, n)
+				e.apply(target, self, hero)
+	else:
+		for e in effects:
+			if e is ThornEffects:
+				e.updateValue(self, n)
+				e.apply(hero, self, target)
 
 func start_drag():
 	dragging = true
@@ -452,6 +479,7 @@ func _ready() -> void:
 	cooldownUI.material_override = mat2
 	Game.startBattle.connect(start_cooldown)
 	Game.stopBattle.connect(stop_cooldown)
+	Game.onDamage.connect(_onDamage)
 	for no in get_tree().get_nodes_in_group("enemie"):
 		target = no
 	for e in effects:

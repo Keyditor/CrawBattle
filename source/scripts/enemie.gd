@@ -48,11 +48,13 @@ func damage(n,c=false):
 			shield -= n
 			return
 		health -= n
+		Game.onDamage.emit("enemie",n)
 	else:
 		if shield > 0:
 			shield -= n
 			return
 		health -= n
+		Game.onDamage.emit("enemie",n)
 
 func heal(n,c=false):
 	if c:
