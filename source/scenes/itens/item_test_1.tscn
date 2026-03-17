@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c83clw7da256o" path="res://scripts/burn_effects.gd" id="5_ckac4"]
 [ext_resource type="Script" uid="uid://drpoi12seot5u" path="res://scripts/poison_effects.gd" id="5_tswfj"]
 [ext_resource type="Script" uid="uid://dl6vwtj6bs5uh" path="res://scripts/weapon_effects.gd" id="6_tswfj"]
+[ext_resource type="Script" uid="uid://d08xqu7g6e7dk" path="res://charge_effects.gd" id="9_m0ncu"]
 [ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_7tdnu"]
 
 [sub_resource type="Resource" id="Resource_m0ncu"]
@@ -48,6 +49,13 @@ tier_upgade = 3
 crit = 30
 metadata/_custom_type_script = "uid://drpoi12seot5u"
 
+[sub_resource type="Resource" id="Resource_4scsy"]
+script = ExtResource("9_m0ncu")
+charge = 2
+tier_upgade = 1
+type_charge = 2
+metadata/_custom_type_script = "uid://d08xqu7g6e7dk"
+
 [sub_resource type="SystemFont" id="SystemFont_xfg7t"]
 font_names = PackedStringArray("Roboto")
 font_weight = 999
@@ -64,7 +72,7 @@ shader_parameter/wave_strength = 0.015
 shader_parameter/wave_frequency = 9.635
 shader_parameter/wave_speed = 3.0
 shader_parameter/line_color = Color(0.39, 1, 0.4814999, 1)
-shader_parameter/trail_color = Color(0.47000003, 0.735, 1, 0.39607844)
+shader_parameter/trail_color = Color(0.47058824, 0.73333335, 1, 0.39607844)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n40cg"]
 points = PackedVector3Array(2, 0.19998042, 3.6000004, 1.899765, 0.3, 3.4999223, -1.7000782, 0.19998042, 3.6000004, 2, 0, 3.6000004, 2, 0.19998042, -3.20046, -1.600235, 0.3, 3.4999223, 1.899765, 0.3, -3.1003819, -1.7000782, 0, 3.6000004, -1.9001566, 0.19998042, 3.4999223, 2, 0, -3.20046, 1.899765, 0.19998042, -3.4006166, 1.7999218, 0.3, -3.3005383, -1.8003132, 0.3, 3.3998437, -1.9001566, 0, 3.4999223, -2, 0.19998042, 3.2997656, 1.899765, 0, -3.4006166, 1.6996868, 0.19998042, -3.5, 1.5998435, 0.3, -3.4006166, -1.9001566, 0.3, 3.199687, -2, 0, 3.2997656, -2, 0.19998042, -3.5, 1.6996868, 0, -3.5, -1.9001566, 0.3, -3.4006166, -2, 0, -3.5)
@@ -80,7 +88,7 @@ itemImage = ExtResource("2_7tdnu")
 slots_necessarios = 2
 base_cooldown = 5
 types = Array[int]([0])
-effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_m0ncu"), SubResource("Resource_akw1l"), SubResource("Resource_7tdnu"), SubResource("Resource_btvkp"), SubResource("Resource_1iat7")])
+effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_m0ncu"), SubResource("Resource_akw1l"), SubResource("Resource_7tdnu"), SubResource("Resource_btvkp"), SubResource("Resource_1iat7"), SubResource("Resource_4scsy")])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
 transparent_bg = true

@@ -136,6 +136,7 @@ func _process(delta: float) -> void:
 		instancia.itemImage = preload("res://voxels/mediumPlaceholder.jpeg")
 		instancia.tier = 0
 		instancia.spawn = "board"
+		instancia.base_cooldown = 15
 		add_child(instancia)
 		await get_tree().create_timer(0.2).timeout
 		instancia2.slots_necessarios = 1

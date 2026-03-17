@@ -45,6 +45,7 @@ var hero
 var target
 var onBattle = false
 var t := 0.0
+var haste : float
 
 func _input(event):
 	if event is InputEventMouseButton and !enemieItem:
@@ -59,6 +60,8 @@ func _input(event):
 				#print("desce")
 
 func _process(delta):
+	if haste < 0:
+		haste = 0
 	if Input.is_action_just_pressed("C"):
 		#await spawn_particle(
 			#self.global_position,
@@ -124,7 +127,13 @@ func start_cooldown():
 		while t < cooldown_time:
 			if onBattle:
 				await get_tree().process_frame
-				t += get_process_delta_time()
+				if haste > 0:
+					t += get_process_delta_time()*2
+					haste -= get_process_delta_time()
+					mat2.set_shader_parameter("trail_color", Color(1.0, 1.0, 1.0, 0.537))
+				else:
+					mat2.set_shader_parameter("trail_color", Color(0.471, 0.733, 1.0, 0.396))
+					t += get_process_delta_time()
 				
 				var p = t / cooldown_time
 				mat2.set_shader_parameter("progress", p)
