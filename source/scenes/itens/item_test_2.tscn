@@ -1,52 +1,19 @@
-[gd_scene format=3 uid="uid://c73yubsow46qs"]
+[gd_scene format=3 uid="uid://c1qcwmvej0kkw"]
 
-[ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xfg7t"]
-[ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="2_7tdnu"]
-[ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_ckac4"]
-[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="3_dxdcr"]
-[ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
-[ext_resource type="Script" uid="uid://cvayaddaydb0y" path="res://scripts/heal_effects.gd" id="4_tswfj"]
-[ext_resource type="Script" uid="uid://5baed8ptmhxl" path="res://scripts/shield_effects.gd" id="5_10bed"]
-[ext_resource type="Script" uid="uid://c83clw7da256o" path="res://scripts/burn_effects.gd" id="5_ckac4"]
-[ext_resource type="Script" uid="uid://drpoi12seot5u" path="res://scripts/poison_effects.gd" id="5_tswfj"]
-[ext_resource type="Script" uid="uid://dl6vwtj6bs5uh" path="res://scripts/weapon_effects.gd" id="6_tswfj"]
-[ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_7tdnu"]
+[ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xdvns"]
+[ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="2_snbx5"]
+[ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_fbryo"]
+[ext_resource type="Script" uid="uid://d08xqu7g6e7dk" path="res://charge_effects.gd" id="4_qpl1h"]
+[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="9_yhoup"]
+[ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="10_a1yii"]
+[ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_p2dtj"]
 
-[sub_resource type="Resource" id="Resource_m0ncu"]
-script = ExtResource("6_tswfj")
-damage = 10
-tier_upgade = 5
-upgrade_type = 1
-crit = 30
-metadata/_custom_type_script = "uid://dl6vwtj6bs5uh"
-
-[sub_resource type="Resource" id="Resource_akw1l"]
-script = ExtResource("4_tswfj")
-heal = 100
-tier_upgade = 50
-crit = 30
-metadata/_custom_type_script = "uid://cvayaddaydb0y"
-
-[sub_resource type="Resource" id="Resource_7tdnu"]
-script = ExtResource("5_10bed")
-shield = 50
-tier_upgade = 25
-crit = 30
-metadata/_custom_type_script = "uid://5baed8ptmhxl"
-
-[sub_resource type="Resource" id="Resource_btvkp"]
-script = ExtResource("5_ckac4")
-burn = 10
-tier_upgade = 5
-crit = 30
-metadata/_custom_type_script = "uid://c83clw7da256o"
-
-[sub_resource type="Resource" id="Resource_1iat7"]
-script = ExtResource("5_tswfj")
-poison = 6
-tier_upgade = 3
-crit = 30
-metadata/_custom_type_script = "uid://drpoi12seot5u"
+[sub_resource type="Resource" id="Resource_f57tu"]
+script = ExtResource("4_qpl1h")
+charge = 1
+tier_upgade = 1
+type_charge = 1
+metadata/_custom_type_script = "uid://d08xqu7g6e7dk"
 
 [sub_resource type="SystemFont" id="SystemFont_xfg7t"]
 font_names = PackedStringArray("Roboto")
@@ -56,7 +23,7 @@ subpixel_positioning = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m0ncu"]
 render_priority = 0
-shader = ExtResource("11_7tdnu")
+shader = ExtResource("11_p2dtj")
 shader_parameter/progress = 0.50000002375
 shader_parameter/line_size = 0.02
 shader_parameter/trail_size = 0.15
@@ -74,13 +41,13 @@ viewport_path = NodePath("SubViewport")
 
 [node name="ItemTest1" type="StaticBody3D" unique_id=578422450]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-script = ExtResource("1_xfg7t")
-itemName = "effectsitem"
-itemImage = ExtResource("2_7tdnu")
+script = ExtResource("1_xdvns")
+itemName = "chargeteste"
+itemImage = ExtResource("2_snbx5")
 slots_necessarios = 2
 base_cooldown = 5
 types = Array[int]([0])
-effects = Array[ExtResource("3_ckac4")]([SubResource("Resource_m0ncu"), SubResource("Resource_akw1l"), SubResource("Resource_7tdnu"), SubResource("Resource_btvkp"), SubResource("Resource_1iat7")])
+effects = Array[ExtResource("3_fbryo")]([SubResource("Resource_f57tu")])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1661723469]
 transparent_bg = true
@@ -182,20 +149,20 @@ horizontal_alignment = 1
 
 [node name="Shape" type="MeshInstance3D" parent="." unique_id=946136437]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
-mesh = ExtResource("3_dxdcr")
+mesh = ExtResource("9_yhoup")
 
 [node name="Image" type="Sprite3D" parent="Shape" unique_id=310197420]
 transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
 flip_h = true
 transparent = false
-texture = ExtResource("4_ckac4")
+texture = ExtResource("10_a1yii")
 
 [node name="Image2" type="Sprite3D" parent="Shape" unique_id=927003491]
 transform = Transform3D(-0.47499993, -4.1525812e-08, -1.815151e-15, 0, -2.0762906e-08, 0.47499993, -4.1525812e-08, 0.47499993, 2.0762906e-08, 0, 0.0789398, 0)
 material_override = SubResource("ShaderMaterial_m0ncu")
 flip_h = true
 transparent = false
-texture = ExtResource("4_ckac4")
+texture = ExtResource("10_a1yii")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=953833221]
 shape = SubResource("ConvexPolygonShape3D_n40cg")

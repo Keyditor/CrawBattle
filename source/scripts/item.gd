@@ -44,6 +44,7 @@ var enemieSlotChoice = 0
 var hero
 var target
 var onBattle = false
+var t := 0.0
 
 func _input(event):
 	if event is InputEventMouseButton and !enemieItem:
@@ -88,6 +89,8 @@ func _process(delta):
 			poisonUI.text = str("[color=purple]",e.newPoison,"[/color]")
 		if e is HealEffects:
 			healUI.text = str("[color=green]",e.newHeal,"[/color]")
+		else:
+			1 == 1
 	
 	if Game.checkUpgrade and tier != 4:
 		print(self.name,": dando upgrade consecutivo")
@@ -107,7 +110,7 @@ func _process(delta):
 func stop_cooldown(who):
 	print(who)
 	onBattle = false
-	var t := 0.0
+	t = 0.0
 	var p = t / cooldown_time
 	mat2.set_shader_parameter("progress", p)
 	cooldownUI.visible = false
@@ -116,7 +119,7 @@ func start_cooldown():
 	print("teste chehsque: ",slots_reservados[0].inventory.name)
 	if slots_reservados[0].inventory.name == "onGorund":
 		cooldown_time = base_cooldown
-		var t := 0.0
+		t = 0.0
 		
 		while t < cooldown_time:
 			if onBattle:
@@ -137,7 +140,7 @@ func start_cooldown():
 			await get_tree().create_timer(0.1).timeout
 	if slots_reservados[0].inventory.name == "enemieGorund":
 		cooldown_time = base_cooldown
-		var t := 0.0
+		t = 0.0
 		
 		while t < cooldown_time:
 			if onBattle:

@@ -129,8 +129,9 @@ func _process(delta: float) -> void:
 			camPos = "ground"
 	if Input.is_action_just_pressed("ui_cancel"):
 		var test = preload("res://scenes/itens/item_test_1.tscn")
+		var test2 = preload("res://scenes/itens/item_test_2.tscn")
 		var instancia = test.instantiate()
-		var instancia2 = test.instantiate()
+		var instancia2 = test2.instantiate()
 		instancia.slots_necessarios = 2
 		instancia.itemImage = preload("res://voxels/mediumPlaceholder.jpeg")
 		instancia.tier = 0
@@ -140,7 +141,7 @@ func _process(delta: float) -> void:
 		instancia2.slots_necessarios = 1
 		instancia2.itemName = "teste2"
 		instancia2.itemImage = preload("res://voxels/smallPlaceholder.jpg")
-		instancia2.enemieItem=true
+		instancia2.enemieItem=false
 		instancia2.enemieSlotChoice = 5
 		instancia2.tier = 0
 		instancia2.base_cooldown = 3
