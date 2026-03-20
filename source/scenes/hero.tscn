@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://wv8hp3dd8tgy" path="res://scripts/slot.gd" id="5_n40cg"]
 [ext_resource type="PackedScene" uid="uid://b14kmuyvy2cev" path="res://scenes/DamageIndicator.tscn" id="6_y2sko"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_y2sko"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_mo806"]
 viewport_path = NodePath("EnemieHp/SubViewport")
 
@@ -82,6 +85,22 @@ size = Vector3(1.4292603, 1.2254028, 4.1168213)
 [node name="Node3D" type="Node3D" unique_id=803403698]
 script = ExtResource("1_3uyx6")
 health = 450
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1935581810]
+transform = Transform3D(1.06, 0, 0, 0, -4.633407e-08, -1.06, 0, 1.06, -4.633407e-08, 0, 3.001, 1.985)
+visible = false
+transparent = false
+texture = SubResource("ViewportTexture_y2sko")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=1623874144]
+size = Vector2i(1600, 900)
+
+[node name="ColorRect" type="ColorRect" parent="Sprite3D/SubViewport" unique_id=75637174]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BattlegroundBase" type="MeshInstance3D" parent="." unique_id=284542744]
 mesh = ExtResource("2_mv13s")

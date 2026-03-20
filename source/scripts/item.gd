@@ -19,6 +19,7 @@ enum _Activations {Active, Passive}
 var cooldown_time := base_cooldown
 var spawn = ""
 
+@onready var cameraItem: Camera3D = $Camera3D
 @onready var mat2 = $Shape/Image2.material_override
 @onready var damageUI = $SubViewport/VBoxContainer/HBoxContainer/Damage
 @onready var shieldUI = $SubViewport/VBoxContainer/HBoxContainer/Shield
@@ -469,6 +470,16 @@ func spawn_particle(start: Vector3, target: Vector3, color: Color):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#match slots_necessarios:
+		#1:
+			#cameraItem.position = Vector3(5,8,0)
+			#cameraItem.size = 4
+		#2:
+			#cameraItem.position = Vector3(6,8,0)
+			#cameraItem.size = 5
+		#3:
+			#cameraItem.position = Vector3(7,8,0)
+			#cameraItem.size = 6.5
 	damageUI.visible = false
 	shieldUI.visible = false
 	burnUI.visible = false

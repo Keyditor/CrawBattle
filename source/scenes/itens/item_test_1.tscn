@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xfg7t"]
 [ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="2_7tdnu"]
 [ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_ckac4"]
-[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="3_dxdcr"]
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="4_ckac4"]
 [ext_resource type="Script" uid="uid://5baed8ptmhxl" path="res://scripts/shield_effects.gd" id="5_10bed"]
 [ext_resource type="Script" uid="uid://dl6vwtj6bs5uh" path="res://scripts/weapon_effects.gd" id="6_tswfj"]
+[ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="7_10bed"]
 [ext_resource type="Script" uid="uid://d08xqu7g6e7dk" path="res://charge_effects.gd" id="9_m0ncu"]
 [ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_7tdnu"]
 
@@ -202,7 +202,7 @@ horizontal_alignment = 1
 
 [node name="Shape" type="MeshInstance3D" parent="." unique_id=946136437]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
-mesh = ExtResource("3_dxdcr")
+mesh = ExtResource("7_10bed")
 
 [node name="Image" type="Sprite3D" parent="Shape" unique_id=310197420]
 transform = Transform3D(-0.475, -4.152582e-08, 1.8151512e-15, 0, -2.076291e-08, -0.475, 4.152582e-08, -0.475, 2.076291e-08, 0, 0, 0)
@@ -234,3 +234,8 @@ texture = SubResource("ViewportTexture_xfg7t")
 [node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1602769556]
 transform = Transform3D(0.99999976, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.99999976, -4.3711363e-08, 0, 0.59101486, 1.0656105)
 texture = SubResource("ViewportTexture_m0ncu")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1411526865]
+transform = Transform3D(2.5, 0, 0, 0, -1.0927848e-07, 2.5, 0, -2.5, -1.0927848e-07, 7, 8, 0)
+projection = 1
+size = 6.5

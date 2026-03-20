@@ -144,7 +144,7 @@ func _process(delta: float) -> void:
 		instancia2.slots_necessarios = 1
 		instancia2.itemName = "teste2"
 		instancia2.itemImage = preload("res://voxels/smallPlaceholder.jpg")
-		instancia2.enemieItem=true
+		instancia2.enemieItem=false
 		instancia2.enemieSlotChoice = 5
 		instancia2.tier = 4
 		instancia2.base_cooldown = 3

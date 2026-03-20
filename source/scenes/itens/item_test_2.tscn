@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://duuqrqqb7wsex" path="res://scripts/item.gd" id="1_xdvns"]
 [ext_resource type="Texture2D" uid="uid://b7ryy028rtdr" path="res://voxels/mediumPlaceholder.jpeg" id="2_snbx5"]
 [ext_resource type="Script" uid="uid://syn5au2dnbed" path="res://scripts/item_effects.gd" id="3_fbryo"]
-[ext_resource type="Script" uid="uid://culdgckxbhiwy" path="res://scripts/thorn_effects.gd" id="4_qpl1h"]
+[ext_resource type="Script" uid="uid://cusg7p8x3nqtg" path="res://scripts/haste_effects.gd" id="4_qpl1h"]
 [ext_resource type="ArrayMesh" uid="uid://ch1rskjam18iv" path="res://materials/smalItem.mesh" id="9_yhoup"]
 [ext_resource type="Texture2D" uid="uid://w3tk8i1fsdal" path="res://voxels/smallPlaceholderOLD.jpeg" id="10_a1yii"]
 [ext_resource type="Shader" uid="uid://cnfyvnx408pud" path="res://shaders/cooldown.gdshader" id="11_p2dtj"]
 
 [sub_resource type="Resource" id="Resource_f57tu"]
 script = ExtResource("4_qpl1h")
-percentage = 20.0
-tier_upgade = 5
-life_steal = true
-metadata/_custom_type_script = "uid://culdgckxbhiwy"
+haste = 2
+tier_upgade = 1
+type_haste = 1
+metadata/_custom_type_script = "uid://cusg7p8x3nqtg"
 
 [sub_resource type="SystemFont" id="SystemFont_xfg7t"]
 font_names = PackedStringArray("Roboto")
@@ -52,7 +52,6 @@ viewport_path = NodePath("SubViewport2")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_xdvns")
 itemName = "chargeteste"
-activationType = 1
 itemImage = ExtResource("2_snbx5")
 slots_necessarios = 2
 base_cooldown = 5
